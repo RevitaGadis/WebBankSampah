@@ -33,8 +33,6 @@ class Nasabah extends Model
     {
         return $this->hasMany(Setoran::class, 'id_nasabah', 'id_nasabah');
     }
-
-    // Tambah saldo dengan aman (dipanggil di dalam DB::transaction saat input setoran)
     public function tambahSaldo(float $jumlah): void
     {
         $this->increment('saldo', $jumlah);

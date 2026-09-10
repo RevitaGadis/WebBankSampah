@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class SetoranService
 {
-    /**
-     * Proses satu transaksi setoran: hitung total, simpan, dan update saldo nasabah.
-     * Dibungkus DB::transaction() biar atomic — kalau ada yang gagal di tengah,
-     * semua di-rollback (saldo TIDAK ikut nambah kalau insert gagal, atau sebaliknya).
-     */
     public function prosesSetoran(array $data, int $idPetugas): Setoran
     {
         return DB::transaction(function () use ($data, $idPetugas) {
@@ -28,7 +23,7 @@ class SetoranService
                 'id_nasabah' => $nasabah->id_nasabah,
                 'id_jenis' => $jenis->id_jenis,
                 'berat' => $berat,
-                'harga' => $hargaSaatIni, // snapshot harga saat transaksi, bukan referensi live
+                'harga' => $hargaSaatIni, 
                 'total' => $total,
                 'tanggal' => now(),
                 'id_user' => $idPetugas,

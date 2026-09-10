@@ -12,7 +12,6 @@ use Illuminate\View\View;
 
 class NasabahController extends Controller
 {
-    // Service di-inject lewat constructor, Laravel otomatis nyediain instance-nya (dependency injection)
     public function __construct(protected NasabahService $nasabahService)
     {
     }

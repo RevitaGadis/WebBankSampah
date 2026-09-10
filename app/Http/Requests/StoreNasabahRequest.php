@@ -8,7 +8,7 @@ class StoreNasabahRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // petugas & admin sama-sama boleh nambah nasabah
+        return true; 
     }
 
     public function rules(): array
@@ -17,7 +17,7 @@ class StoreNasabahRequest extends FormRequest
             'nama' => ['required', 'string', 'max:100'],
             'kelas' => ['required', 'string', 'max:30'],
             'no_hp' => ['nullable', 'string', 'max:20'],
-            'pin' => ['required', 'digits_between:4,6'], // dipakai buat login nasabah nanti
+            'pin' => ['required', 'digits_between:4,6'],
         ];
     }
 }
