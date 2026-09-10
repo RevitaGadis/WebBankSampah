@@ -9,7 +9,6 @@ use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\Portal\PortalController;
 use App\Http\Controllers\SetoranController;
 
-// Login petugas/admin (guard web)
 Route::middleware('guest:web')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
@@ -18,7 +17,6 @@ Route::post('/logout', [LoginController::class, 'destroy'])
     ->middleware('auth:web')
     ->name('logout');
 
-// Area petugas/admin
 Route::middleware('auth:web')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -32,7 +30,6 @@ Route::middleware('auth:web')->group(function () {
     });
 });
 
-// Portal nasabah (guard nasabah, prefix beda)
 Route::prefix('portal')->group(function () {
     Route::middleware('guest:nasabah')->group(function () {
         Route::get('/login', [NasabahLoginController::class, 'create'])->name('nasabah.login');

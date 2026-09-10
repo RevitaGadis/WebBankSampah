@@ -22,10 +22,15 @@ class Nasabah extends Model
         'saldo',
     ];
 
+    protected $hidden = [
+        'password',
+    ];
+
     protected function casts(): array
     {
         return [
             'saldo' => 'decimal:2',
+            'password' => 'hashed',
         ];
     }
 
