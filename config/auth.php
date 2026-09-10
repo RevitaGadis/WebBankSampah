@@ -42,6 +42,21 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'nasabah' => [                    // ← guard baru
+            'driver' => 'session',
+            'provider' => 'nasabah',
+        ],
+    ],
+
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'nasabah' => [                    // ← provider baru
+            'driver' => 'eloquent',
+            'model' => App\Models\Nasabah::class,
+        ],
     ],
 
     /*
@@ -61,17 +76,6 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', User::class),
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
 
     /*
     |--------------------------------------------------------------------------
