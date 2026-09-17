@@ -9,3 +9,58 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@layer base {
+    body { @apply bg-[#f8f2df] text-[#32160b] antialiased; }
+
+    a[href], button:not(:disabled) {
+        transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+    }
+
+    a[href]:hover, button:not(:disabled):hover {
+        filter: brightness(.96);
+        transform: translateY(-1px);
+    }
+
+    a[href]:focus-visible, button:focus-visible {
+        outline: 3px solid rgb(154 93 38 / .38);
+        outline-offset: 3px;
+    }
+}
+@layer components {
+    .ns-card { @apply rounded-2xl bg-white shadow-[0_12px_28px_rgba(75,40,13,.08)]; }
+    .ns-label { @apply text-[11px] font-bold uppercase tracking-[.08em] text-[#695b51]; }
+    .ns-input { @apply w-full rounded-xl border border-[#ddd4bd] bg-[#fffdf7] px-4 py-3 text-sm outline-none transition focus:border-[#9a5d26] focus:ring-2 focus:ring-[#9a5d26]/15; }
+    .ns-nav-link { @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-[#eadbc8] transition hover:bg-white/10; }
+    .ns-nav-link.active { @apply bg-[#955a25] text-white shadow-sm; }
+}
+
+/* Ikon hanya dipertahankan di sidebar petugas/nasabah sesuai rancangan. */
+.petugas-content i,
+body:has(#petugas-sidebar) > div > header i { display: none; }
+
+/* Ikon tindakan tabel tetap terlihat; ikon dekoratif konten tetap disembunyikan. */
+.petugas-content table button i { display: inline; }
+
+/* Aksi struk tetap memiliki tampilan yang sama saat ditekan. */
+.table-action-stable:hover,
+.table-action-stable:active {
+    filter: none;
+    transform: none;
+}
+
+/* Modal komoditas memakai bidang horizontal yang lebih efisien tanpa mengubah form/dummy data. */
+[data-admin-waste-modal="add"] > section,
+[data-admin-waste-modal="edit"] > section,
+[data-admin-waste-modal="detail"] > section { max-width: 36rem; }
+
+[data-admin-waste-modal="delete"] > section { max-width: 32rem; }
+
+@media (min-width: 640px) {
+    [data-admin-waste-modal="add"] form > .mt-5.space-y-3,
+    [data-admin-waste-modal="edit"] form > .mt-5.space-y-3 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+
+    [data-admin-waste-modal="add"] form > .mt-5.space-y-3 > :nth-child(3),
+    [data-admin-waste-modal="add"] form > .mt-5.space-y-3 > :last-child,
+    [data-admin-waste-modal="edit"] form > .mt-5.space-y-3 > :last-child { grid-column: span 2; }
+}
