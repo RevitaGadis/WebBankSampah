@@ -4,7 +4,6 @@
     <section class="mt-6 grid gap-4 md:grid-cols-4"><x-nasabah.stat-card label="Total Akun Terdaftar" value="{{ $stats['totalAccounts'] ?? '248' }}"/><x-nasabah.stat-card label="Nasabah Siswa" value="{{ $stats['totalStudentAccounts'] ?? '216' }}"/><x-nasabah.stat-card label="Guru & Tendik" value="{{ $stats['totalTeacherAccounts'] ?? '24' }}"/><x-nasabah.stat-card label="Petugas & Admin" value="{{ $stats['totalStaffAccounts'] ?? '8' }}"/></section>
     <section class="ns-card mt-8 overflow-hidden"><div class="p-5"><x-admin.table-search placeholder="Cari nama, username, role..." target="[data-admin-account-rows] tr" empty="[data-admin-account-empty]" /></div><div class="overflow-x-auto"><table class="w-full min-w-[1000px] text-sm"><thead class="bg-[#f8f1df] text-left text-[10px] uppercase"><tr><th class="p-4">No</th><th>Pengguna &amp; Identitas</th><th>Peran</th><th>Rombel / Unit Kerja</th><th>Kontak WA</th><th>Status Akun</th><th>Terakhir Masuk</th><th>Aksi</th></tr></thead><tbody data-admin-account-rows>@foreach($accounts as $i => $a)<tr data-search="{{ strtolower($a['name'].' '.$a['username'].' '.$a['role'].' '.$a['class'].' '.$a['phone']) }}" class="border-b border-[#f0eadf]"><td class="p-4">{{ $i + 1 }}</td><td><b>{{ $a['name'] }}</b><small class="block">{{ $a['username'] }}</small></td><td>{{ $a['role'] }}</td><td>{{ $a['class'] }}</td><td>{{ $a['phone'] }}</td><td><span class="rounded-full bg-[#dce9c9] px-2 py-1 text-xs">&bull; {{ $a['status'] }}</span></td><td>Hari ini, 08:14 WIB</td>                <td class="space-x-3"><button data-admin-account-open="detail" data-number="{{ $a['number'] }}" data-name="{{ $a['name'] }}" data-username="{{ $a['username'] }}" data-role="{{ $a['role'] }}" data-class="{{ $a['class'] }}" data-phone="{{ $a['phone'] }}" data-status="{{ $a['status'] }}" data-initial="{{ strtoupper(substr($a['name'],0,2)) }}" class="text-[#92591f]"><i class="bi bi-eye"></i></button><button data-admin-account-open="edit" data-number="{{ $a['number'] }}" data-name="{{ $a['name'] }}" data-username="{{ $a['username'] }}" data-role="{{ $a['role'] }}" data-class="{{ $a['class'] }}" data-phone="{{ $a['phone'] }}" data-status="{{ $a['status'] }}" data-initial="{{ strtoupper(substr($a['name'],0,2)) }}" class="text-[#92591f]"><i class="bi bi-pencil"></i></button><button data-admin-account-open="delete" data-number="{{ $a['number'] }}" data-name="{{ $a['name'] }}" data-username="{{ $a['username'] }}" data-role="{{ $a['role'] }}" data-class="{{ $a['class'] }}" data-phone="{{ $a['phone'] }}" data-status="{{ $a['status'] }}" data-initial="{{ strtoupper(substr($a['name'],0,2)) }}" class="text-red-600"><i class="bi bi-person-x"></i></button></td></tr>@endforeach</tbody></table></div><p data-admin-account-empty class="hidden p-6 text-center text-sm text-[#695b51]">Tidak ada akun yang sesuai dengan pencarian.</p></section>
 
-    {{-- Modal Tambah Akun --}}
     <div data-admin-account-modal="add" class="fixed inset-0 z-[80] hidden items-center justify-center bg-[#4a1f0d]/80 p-4">
         <section role="dialog" aria-modal="true" aria-labelledby="account-add-title" class="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl">
             <header class="flex items-start justify-between bg-[#fcf3dd] px-6 py-5">
@@ -35,7 +34,6 @@
         </section>
     </div>
 
-    {{-- Modal Detail Akun --}}
     <div data-admin-account-modal="detail" class="fixed inset-0 z-[80] hidden items-center justify-center bg-[#4a1f0d]/80 p-4">
         <section role="dialog" aria-modal="true" aria-labelledby="account-detail-title" class="max-h-[calc(100vh-2rem)] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-2xl">
             <header class="flex items-center justify-between bg-[#54220f] px-6 py-4 text-white">
@@ -90,7 +88,6 @@
         </section>
     </div>
 
-    {{-- Modal Edit Akun --}}
     <div data-admin-account-modal="edit" class="fixed inset-0 z-[80] hidden items-center justify-center bg-[#4a1f0d]/80 p-4">
         <section role="dialog" aria-modal="true" aria-labelledby="account-edit-title" class="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl">
             <header class="flex items-start justify-between bg-[#54220f] px-6 py-5 text-white">
@@ -128,7 +125,6 @@
         </section>
     </div>
 
-    {{-- Modal Hapus / Nonaktif --}}
     <div data-admin-account-modal="delete" class="fixed inset-0 z-[80] hidden items-center justify-center bg-[#4a1f0d]/80 p-4">
         <section role="dialog" aria-modal="true" aria-labelledby="account-delete-title" class="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
             <header class="flex items-start justify-between bg-[#fcf3dd] px-6 py-5">

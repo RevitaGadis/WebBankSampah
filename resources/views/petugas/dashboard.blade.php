@@ -1,6 +1,6 @@
 <x-layouts.petugas title="Dashboard Petugas" :officer="$officer">
     <section class="rounded-2xl bg-[#f5edda] p-6"><span class="rounded-full bg-[#ece4d2] px-3 py-1 text-xs font-bold">▣
-            {{ $stats['currentDate'] ?? 'Senin, 07 September 2026' }}</span>
+            {{ $stats['currentDate'] }}</span>
         <div class="mt-3 flex flex-wrap items-center justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-bold">Dashboard Pengelola</h1>

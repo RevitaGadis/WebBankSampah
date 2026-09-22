@@ -42,7 +42,7 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'nasabah' => [                    // ← guard baru
+        'nasabah' => [                    
             'driver' => 'session',
             'provider' => 'nasabah',
         ],
@@ -53,7 +53,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'nasabah' => [                    // ← provider baru
+        'nasabah' => [                   
             'driver' => 'eloquent',
             'model' => App\Models\Nasabah::class,
         ],

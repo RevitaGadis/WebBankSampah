@@ -1,6 +1,6 @@
 <x-layouts.admin title="Dashboard Admin" :admin="$admin">
     <section class="rounded-2xl bg-[#f5edda] p-6 lg:p-7">
-        <span class="text-xs font-bold">{{ $stats['currentDate'] ?? 'Senin, 07 September 2026' }}</span>
+        <span class="text-xs font-bold">{{ $stats['currentDate'] }}</span>
         <div class="mt-3"><h1 class="text-3xl font-bold">Dashboard Pengelola</h1><p class="mt-1 text-[#695b51]">Selamat datang kembali, {{ $admin['name'] }} &bull; Panel pengelolaan bank sampah sekolah.</p></div>
     </section>
     <section class="mt-3 grid gap-4 md:grid-cols-3">

@@ -46,7 +46,7 @@ class PetugasController extends Controller
                 'price' => number_format((float) $jenis->harga_per_kg, 0, ',', '.'),
                 'unit' => 'Kg',
                 'month' => number_format((float) $kgBulanIni, 1),
-                'detail' => '', // gak ada field spesifikasi tambahan di skema kita
+                'detail' => '',
             ];
         })->all();
     }

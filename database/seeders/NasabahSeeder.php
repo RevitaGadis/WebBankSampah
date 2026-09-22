@@ -31,7 +31,7 @@ class NasabahSeeder extends Seeder
                     'kelas' => $item['kelas'],
                     'no_hp' => $item['no_hp'],
                     'saldo' => 0,
-                    'password' => Hash::make('1234'), // PIN default semua dummy: 1234
+                    'password' => Hash::make('1234'),
                 ]
             );
         }

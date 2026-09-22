@@ -41,13 +41,35 @@ class AdminController extends Controller
             ];
         })->all();
     }
+    private function studentArray(Nasabah $n): array
+    {
+        $terakhir = $n->setoran()->latest('tanggal')->first();
+
+        return [
+            'id' => $n->id_nasabah,
+            'initial' => strtoupper(substr($n->nama, 0, 2)),
+            'name' => $n->nama,
+            'number' => $n->no_nasabah,
+            'class' => $n->kelas,
+            'phone' => $n->no_hp ?? '-',
+            'balance' => number_format((float) $n->saldo, 0, ',', '.'),
+            'count' => $n->setoran()->count(),
+            'status' => 'Aktif',
+            'total_weight' => number_format((float) $n->setoran()->sum('berat'), 1),
+            'last_deposit' => $terakhir ? $terakhir->tanggal->format('d M Y') : '-',
+            'last_deposit_item' => $terakhir
+                ? $terakhir->jenisSampah->nama_jenis . ' (' . $terakhir->berat . ' Kg)'
+                : '-',
+        ];
+    }
 
     public function dashboard(): View
     {
         $stats = [
-            'totalSampahKg' => number_format((float) Setoran::sum('berat'), 1),
-            'totalTransaksi' => Setoran::count(),
-            'totalSaldoBeredar' => number_format((float) Nasabah::sum('saldo'), 0, ',', '.'),
+            'currentDate' => now()->translatedFormat('l, d F Y'),
+            'totalWeight' => number_format((float) Setoran::sum('berat'), 1) . ' Kg',
+            'totalTransactions' => Setoran::count(),
+            'totalBalance' => 'Rp ' . number_format((float) Nasabah::sum('saldo'), 0, ',', '.'),
         ];
 
         $transactions = Setoran::with(['nasabah', 'jenisSampah', 'petugas'])
@@ -63,17 +85,8 @@ class AdminController extends Controller
 
     public function nasabah(): View
     {
-        $students = Nasabah::withCount('setoran')->orderBy('nama')->get()->map(fn ($n) => [
-            'id' => $n->id_nasabah,
-            'name' => $n->nama,
-            'number' => $n->no_nasabah,
-            'class' => $n->kelas,
-            'phone' => $n->no_hp ?? '-',
-            'count' => $n->setoran_count,
-            'balance' => number_format((float) $n->saldo, 0, ',', '.'),
-            'status' => 'Aktif',
-            'initial' => strtoupper(substr($n->nama, 0, 2)),
-        ])->all();
+        $students = Nasabah::orderBy('nama')->get()
+            ->map(fn ($n) => $this->studentArray($n))->all();
 
         $stats = [
             'totalStudents' => Nasabah::where('kelas', '!=', 'Guru')->count(),
@@ -90,21 +103,25 @@ class AdminController extends Controller
 
     public function rekapNasabah(Nasabah $nasabah): View
     {
-        $riwayat = $nasabah->setoran()->with('jenisSampah', 'petugas')
+        $transactions = $nasabah->setoran()->with('jenisSampah', 'petugas')
             ->latest('tanggal')->get()
             ->map(fn ($s) => TransactionFormatter::forPetugas($s))->all();
 
+        $stats = [
+            'lastUpdated' => now()->translatedFormat('d F Y, H:i') . ' WIB',
+        ];
+
         return view('admin.rekap-nasabah', [
             'admin' => $this->admin(),
-            'nasabah' => $nasabah,
-            'riwayat' => $riwayat,
+            'student' => $this->studentArray($nasabah),
+            'transactions' => $transactions,
+            'stats' => $stats,
         ]);
     }
 
     public function jenisSampah(): View
     {
         $waste = $this->waste();
-
         $hargaTertinggi = JenisSampah::orderByDesc('harga_per_kg')->first();
 
         $stats = [
@@ -129,14 +146,22 @@ class AdminController extends Controller
             'name' => $u->nama,
             'username' => $u->username,
             'role' => $u->role === 'admin' ? 'Administrator' : 'Petugas',
-            'class' => 'Staf Sekolah', // users gak punya kolom kelas, disamain aja
-            'phone' => '-', // users gak punya kolom no_hp di skema kita
+            'class' => 'Staf Sekolah',
+            'phone' => '-',
             'status' => 'Aktif',
         ])->all();
+
+        $stats = [
+            'totalAccounts' => User::count() + Nasabah::count(),
+            'totalStudentAccounts' => Nasabah::where('kelas', '!=', 'Guru')->count(),
+            'totalTeacherAccounts' => Nasabah::where('kelas', 'Guru')->count(),
+            'totalStaffAccounts' => User::count(),
+        ];
 
         return view('admin.akun', [
             'admin' => $this->admin(),
             'accounts' => $accounts,
+            'stats' => $stats,
         ]);
     }
 

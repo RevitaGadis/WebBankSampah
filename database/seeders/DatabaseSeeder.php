@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             JenisSampahSeeder::class,
             NasabahSeeder::class,
-            SetoranSeeder::class, // jalan terakhir, butuh 3 seeder di atas udah ada datanya
+            SetoranSeeder::class, 
         ]);
     }
 }

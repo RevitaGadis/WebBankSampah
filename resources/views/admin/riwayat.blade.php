@@ -87,7 +87,6 @@
         </footer>
     </section>
 
-    {{-- Modal Detail Transaksi --}}
     <div data-admin-transaction-modal class="fixed inset-0 z-[80] hidden items-center justify-center bg-[#4a1f0d]/80 p-3 sm:p-5">
         <section role="dialog" aria-modal="true" aria-labelledby="admin-transaction-title" class="max-h-[calc(100vh-1.5rem)] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-2xl sm:max-h-[calc(100vh-2.5rem)]">
             <header class="flex items-start justify-between bg-[#fcf3dd] px-5 py-4 sm:px-6">

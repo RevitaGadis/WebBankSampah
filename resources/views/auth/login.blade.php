@@ -21,8 +21,8 @@
                 <h1 class="relative max-w-sm text-4xl font-bold leading-[1.1]">Kelola Sampah,<br>Tumbuhkan Tabungan.
                 </h1>
                 <p class="relative mt-14 max-w-sm text-sm leading-6 text-[#e0c7b2]">Platform tata kelola timbang sampah
-                    terpadu untuk menanamkan literasi sirkular ekonomi dan tabungan masa depan warga SMK Negeri Hijau
-                    Lestari.</p>
+                    terpadu untuk menanamkan literasi sirkular ekonomi dan tabungan masa depan warga SMKN 2 Cimahi
+                    </p>
                 <div class="relative mt-16 space-y-4">
                     <div class="rounded-2xl border border-white/15 bg-[#6b351a] p-4"><b class="block text-sm">◉ &nbsp;
                             Penimbangan Terverifikasi ISO</b><small class="ml-6 block text-[#d9b9a0]">Timbangan digital
@@ -33,7 +33,7 @@
                 </div>
                 <div
                     class="absolute bottom-6 left-9 right-9 flex justify-between border-t border-white/15 pt-6 text-xs text-[#d8bba4]">
-                    <span>Versi Sistem 2.4.0–PROD</span><span>SMKN 2 Cimahi © 2026</span></div>
+                    <span>Rahma - Revita - Yunifa</span><span>SMKN 2 Cimahi © 2026</span></div>
             </div>
             <div class="flex items-center justify-center p-8 lg:p-16">
                 <form class="w-full max-w-md" method="POST" action="{{ route('login') }}">
@@ -69,7 +69,7 @@
                     <hr class="my-6 border-[#eee7d8]">
                     <div class="rounded-xl border border-[#e5ddca] bg-[#faf7ed] p-4 text-xs leading-5"><b>● &nbsp; Belum
                             memiliki akun nasabah?</b><br><span class="ml-5">Buku tabungan dan akses akun digital
-                            diterbitkan di ruang piket Bank Sampah Gedung C oleh pengurus sekolah.</span></div>
+                            diterbitkan di ruang operator Bank Sampah oleh pengurus sekolah.</span></div>
                 </form>
             </div>
         </section>

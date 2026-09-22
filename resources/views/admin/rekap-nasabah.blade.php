@@ -67,6 +67,6 @@
     </section>
 
     <div class="mt-6 rounded-lg bg-[#f1ead9] px-5 py-3 text-xs text-[#695b51]">
-        <i class="bi bi-info-circle mr-1"></i> Data rekap ini diambil dari sistem pembukuan Bank Sampah SMKN 2 Cimahi. Terakhir diperbarui: {{ $stats['lastUpdated'] ?? '07 September 2026, 08:14 WIB' }}.
+        <i class="bi bi-info-circle mr-1"></i> Data rekap ini diambil dari sistem pembukuan Bank Sampah SMKN 2 Cimahi. Terakhir diperbarui: {{ $stats['lastUpdated'] }}.
     </div>
 </x-layouts.admin>

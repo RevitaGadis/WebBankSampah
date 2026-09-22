@@ -38,9 +38,6 @@
         <footer class="flex items-center justify-between px-6 py-4 text-xs text-[#695b51]"><span>Menampilkan {{ count($waste) }} dari {{ $stats['totalCategories'] ?? count($waste) }} komoditas aktif &bull; Pembaruan terakhir oleh {{ $stats['lastUpdatedBy'] ?? 'Ibu Sri Wahyuni' }}</span><span>‹ Sebelumnya &nbsp;&nbsp; <b>1</b> &nbsp;&nbsp; Berikutnya ›</span></footer>
     </section>
 
-    
-
-{{-- Modal Tambah --}}
 <div data-admin-waste-modal="add" class="fixed inset-0 z-[80] hidden items-center justify-center bg-black/80 p-4">
     <section role="dialog" aria-modal="true" class="w-full max-w-sm overflow-hidden rounded-xl bg-white shadow-2xl">
         <form method="POST" action="{{ route('admin.jenis-sampah.store') }}" class="p-6">
@@ -73,7 +70,6 @@
     </section>
 </div>
 
-{{-- Modal Edit --}}
 <div data-admin-waste-modal="edit" class="fixed inset-0 z-[80] hidden items-center justify-center bg-black/80 p-4">
     <section role="dialog" aria-modal="true" class="w-full max-w-sm overflow-hidden rounded-xl bg-white shadow-2xl">
         <form method="POST" action="" id="form-edit-waste" class="p-6">
@@ -106,10 +102,8 @@
     </section>
 </div>
 
-{{-- Modal Detail (biarin sama persis kayak sebelumnya, gak perlu diubah, cuma display doang) --}}
 <div data-admin-waste-modal="detail" class="fixed inset-0 z-[80] hidden items-center justify-center bg-black/80 p-4"><section role="dialog" aria-modal="true" class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl"><header class="flex items-start justify-between bg-[#fcf3dd] px-5 py-4"><div><h2 class="text-xl font-bold">Detail Komoditas</h2><p class="text-xs text-[#695b51]">Informasi tarif dan spesifikasi komoditas</p></div><button type="button" data-admin-waste-close class="text-xl text-[#695b51]">&times;</button></header><div class="space-y-4 p-5"><section class="rounded-xl bg-[#fff9ea] p-4"><span data-aw-code class="rounded bg-[#dce9c9] px-2 py-1 text-xs font-mono"></span><b data-aw-name class="mt-3 block text-lg"></b></section><div class="grid grid-cols-2 gap-3"><div class="rounded-lg border p-3"><small class="text-[#695b51]">Tarif Beli Acuan</small><b class="mt-1 block">Rp <span data-aw-price></span></b></div><div class="rounded-lg border p-3"><small class="text-[#695b51]">Satuan Timbang</small><b data-aw-unit class="mt-1 block"></b></div><div class="rounded-lg border p-3"><small class="text-[#695b51]">Timbangan Bulan Ini</small><b class="mt-1 block"><span data-aw-month></span> <span data-aw-unit></span></b></div><div class="rounded-lg border p-3"><small class="text-[#695b51]">Status</small><b class="mt-1 block text-[#587332]">&bull; Aktif</b></div></div></div><footer class="flex justify-end gap-2 border-t bg-[#fcf3dd] px-5 py-3"><button type="button" data-admin-waste-close class="rounded-lg border border-[#decfb8] px-4 py-2 text-xs font-bold">Tutup</button><button type="button" data-admin-waste-open="edit" class="rounded-lg bg-[#92591f] px-4 py-2 text-xs font-bold text-white">Ubah Komoditas</button></footer></section></div>
 
-{{-- Modal Hapus --}}
 <div data-admin-waste-modal="delete" class="fixed inset-0 z-[80] hidden items-center justify-center bg-black/80 p-4">
     <section role="dialog" aria-modal="true" class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
         <header class="flex gap-3">

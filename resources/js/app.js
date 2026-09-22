@@ -271,7 +271,6 @@ setoranCariInput?.addEventListener('input', () => {
     }, 300);
 });
 
-// --- Pilih jenis sampah (tombol) ---
 const setoranHargaTampil = document.querySelector('#setoran-harga-tampil');
 const setoranTotalTampil = document.querySelector('#setoran-total-tampil');
 const setoranIdJenisInput = document.querySelector('#setoran-id-jenis');
@@ -298,15 +297,12 @@ document.querySelectorAll('[data-waste-choice]').forEach((button) => {
 
 setoranBeratInput?.addEventListener('input', hitungTotal);
 
-// Klik di luar dropdown hasil cari -> tutup
 document.addEventListener('click', (event) => {
     if (setoranHasilDiv && !setoranHasilDiv.contains(event.target) && event.target !== setoranCariInput) {
         setoranHasilDiv.classList.add('hidden');
     }
 });
 
-// ====== TAMBAHAN LAGI buat modal edit/delete jenis sampah (admin) ======
-// Set action form edit/delete secara dinamis sesuai ID baris yang diklik
 document.querySelectorAll('[data-admin-waste-open="edit"], [data-admin-waste-open="delete"]').forEach((button) => {
     button.addEventListener('click', () => {
         const id = button.dataset.id;

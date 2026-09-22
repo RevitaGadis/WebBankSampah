@@ -13,7 +13,7 @@ Route::redirect('/', '/login');
 
 /*
 |--------------------------------------------------------------------------
-| Login universal — 1 halaman, coba 2 guard (web lalu nasabah)
+| Login 
 |--------------------------------------------------------------------------
 */
 Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -21,7 +21,7 @@ Route::post('/login', [LoginController::class, 'store']);
 
 /*
 |--------------------------------------------------------------------------
-| Area Nasabah (guard: nasabah)
+| Area Nasabah 
 |--------------------------------------------------------------------------
 */
 Route::prefix('nasabah')->name('nasabah.')->middleware('auth:nasabah')->group(function () {
@@ -34,8 +34,7 @@ Route::prefix('nasabah')->name('nasabah.')->middleware('auth:nasabah')->group(fu
 
 /*
 |--------------------------------------------------------------------------
-| Area Petugas (guard: web) — halaman TAMPILAN pakai nama flat (sesuai Blade),
-| aksi CREATE/UPDATE/DELETE tetap lewat resource route terpisah di bawah.
+| Area Petugas 
 |--------------------------------------------------------------------------
 */
 Route::prefix('petugas')->name('petugas.')->middleware('auth:web')->group(function () {
@@ -46,10 +45,8 @@ Route::prefix('petugas')->name('petugas.')->middleware('auth:web')->group(functi
     Route::get('/riwayat', [PetugasController::class, 'riwayat'])->name('riwayat');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-    // Endpoint JSON buat autocomplete cari nasabah di modal setoran
     Route::get('/setoran/cari-nasabah', [SetoranController::class, 'cariNasabah'])->name('setoran.cari-nasabah');
 
-    // Aksi beneran (create/update/delete) — dipanggil dari form/modal
     Route::post('/setoran/simpan', [SetoranController::class, 'store'])->name('setoran.store');
     Route::post('/nasabah/simpan', [NasabahController::class, 'store'])->name('nasabah.store');
     Route::put('/nasabah/{nasabah}', [NasabahController::class, 'update'])->name('nasabah.update');
@@ -58,7 +55,7 @@ Route::prefix('petugas')->name('petugas.')->middleware('auth:web')->group(functi
 
 /*
 |--------------------------------------------------------------------------
-| Area Admin (guard: web, role admin)
+| Area Admin 
 |--------------------------------------------------------------------------
 */
 Route::prefix('admin')->name('admin.')->middleware(['auth:web', 'role:admin'])->group(function () {
@@ -70,7 +67,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:web', 'role:admin'])->
     Route::get('/riwayat', [AdminController::class, 'riwayat'])->name('riwayat');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-    // Aksi beneran
     Route::post('/jenis-sampah/simpan', [JenisSampahController::class, 'store'])->name('jenis-sampah.store');
     Route::put('/jenis-sampah/{jenis_sampah}', [JenisSampahController::class, 'update'])->name('jenis-sampah.update');
     Route::delete('/jenis-sampah/{jenis_sampah}', [JenisSampahController::class, 'destroy'])->name('jenis-sampah.destroy');

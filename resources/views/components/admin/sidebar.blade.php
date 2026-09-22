@@ -4,7 +4,6 @@
     id="admin-sidebar"
     class="fixed inset-y-0 left-0 z-40 flex w-[268px] -translate-x-full flex-col bg-[#54220f] px-5 py-7 text-white transition-transform lg:translate-x-0"
 >
-    {{-- Logo --}}
     <a
         href="{{ route('admin.dashboard') }}"
         class="flex items-center gap-3 border-b border-white/10 pb-6"
@@ -21,7 +20,6 @@
         </span>
     </a>
 
-    {{-- Menu --}}
     <p class="mt-5 text-[10px] font-bold tracking-wider text-[#c29f87]">
         MENU UTAMA
     </p>
@@ -68,7 +66,6 @@
         </a>
     </nav>
 
-    {{-- Admin Account --}}
     <div class="mt-auto rounded-xl border border-white/10 bg-[#421807] p-3">
         <div class="flex items-center gap-3">
             <span class="grid size-10 place-items-center rounded-full bg-[#9a5d26] font-bold">

@@ -21,11 +21,7 @@ class SetoranSeeder extends Seeder
             return;
         }
 
-        // Pakai SetoranService yang sama kayak yang dipanggil Controller,
-        // biar saldo nasabah ke-update otomatis dan konsisten (bukan insert manual ke tabel).
         $service = app(SetoranService::class);
-
-        // Bikin 15 transaksi dummy, tanggal disebar mundur beberapa hari biar dashboard/grafik ada variasi
         for ($i = 0; $i < 15; $i++) {
             $service->prosesSetoran([
                 'id_nasabah' => $nasabah->random()->id_nasabah,
