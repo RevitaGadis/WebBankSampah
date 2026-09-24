@@ -8,15 +8,10 @@ use App\Models\Nasabah;
 use App\Models\Setoran;
 use App\Support\TransactionFormatter;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class PetugasController extends Controller
 {
-    /**
-     * $officer dipakai di semua halaman petugas (navbar, sidebar).
-     * Dipusatkan di sini biar gak nulis ulang di tiap method.
-     */
     private function officer(): array
     {
         $user = Auth::guard('web')->user();
@@ -27,10 +22,6 @@ class PetugasController extends Controller
         ];
     }
 
-    /**
-     * $waste dipakai di halaman setoran (pilihan jenis sampah) dan jenis-sampah (katalog).
-     * 'month' = total kg jenis itu yang disetor bulan ini.
-     */
     private function waste(): array
     {
         return JenisSampah::orderBy('nama_jenis')->get()->map(function ($jenis, $i) {

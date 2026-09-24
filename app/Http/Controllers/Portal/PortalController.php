@@ -9,40 +9,6 @@ use Illuminate\View\View;
 
 class PortalController extends Controller
 {
-    private function student(): array
-    {
-        /** @var \App\Models\Nasabah $nasabah */
-        $nasabah = Auth::guard('nasabah')->user();
-
-        $totalBerat = $nasabah->setoran()->sum('berat');
-        $terakhir = $nasabah->setoran()->latest('tanggal')->first();
-
-        return [
-            'id' => $nasabah->id_nasabah,
-            'initial' => strtoupper(substr($nasabah->nama, 0, 2)),
-            'name' => $nasabah->nama,
-            'number' => $nasabah->no_nasabah,
-            'class' => $nasabah->kelas,
-            'phone' => $nasabah->no_hp ?? '-',
-            'username' => $nasabah->no_nasabah,
-            'balance' => number_format((float) $nasabah->saldo, 0, ',', '.'),
-            'count' => $nasabah->setoran()->count(),
-            'status' => 'Aktif',
-            'total_weight' => number_format((float) $totalBerat, 1) . ' Kg',
-            'last_deposit' => $terakhir ? $terakhir->tanggal->format('d M Y') : '-',
-            'last_deposit_item' => $terakhir
-                ? $terakhir->jenisSampah->nama_jenis . ' (' . $terakhir->berat . ' Kg)'
-                : '-',
-            'last_activity_desc' => $terakhir
-                ? 'Penyetoran ' . $terakhir->berat . ' Kg ' . $terakhir->jenisSampah->nama_jenis
-                : 'Belum ada aktivitas',
-            'last_activity_time' => $terakhir ? $terakhir->tanggal->format('d M Y, H:i') . ' WIB' : '-',
-            'book_number' => 'BK-' . str_pad((string) $nasabah->id_nasabah, 4, '0', STR_PAD_LEFT),
-            'last_change' => $terakhir ? '+ Rp ' . number_format((float) $terakhir->total, 0, ',', '.') : '-',
-            'last_change_desc' => $terakhir ? $terakhir->tanggal->diffForHumans() : '-',
-        ];
-    }
-
     public function dashboard(): View
     {
         /** @var \App\Models\Nasabah $nasabah */
@@ -65,7 +31,7 @@ class PortalController extends Controller
             ->all();
 
         return view('nasabah.dashboard', [
-            'student' => $this->student(),
+            'student' => $nasabah->toLengkap(),
             'stats' => $stats,
             'transactions' => $transactions,
         ]);
@@ -104,7 +70,7 @@ class PortalController extends Controller
             ->all();
 
         return view('nasabah.riwayat', [
-            'student' => $this->student(),
+            'student' => $nasabah->toLengkap(),
             'stats' => $stats,
             'transactions' => $transactions,
         ]);
@@ -136,7 +102,7 @@ class PortalController extends Controller
             ->all();
 
         return view('nasabah.saldo', [
-            'student' => $this->student(),
+            'student' => $nasabah->toLengkap(),
             'stats' => $stats,
             'transactions' => $transactions,
         ]);
@@ -144,8 +110,11 @@ class PortalController extends Controller
 
     public function profil(): View
     {
+        /** @var \App\Models\Nasabah $nasabah */
+        $nasabah = Auth::guard('nasabah')->user();
+
         return view('nasabah.profil', [
-            'student' => $this->student(),
+            'student' => $nasabah->toLengkap(),
         ]);
     }
 }

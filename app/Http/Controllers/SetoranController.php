@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSetoranRequest;
-use App\Models\JenisSampah;
 use App\Models\Nasabah;
 use App\Models\Setoran;
 use App\Services\SetoranService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,26 +18,6 @@ class SetoranController extends Controller
     {
     }
 
-    public function index(Request $request): View
-    {
-        $setoran = Setoran::query()
-            ->with(['nasabah', 'jenisSampah', 'petugas'])
-            ->when($request->tanggal_mulai, fn ($q, $v) => $q->whereDate('tanggal', '>=', $v))
-            ->when($request->tanggal_selesai, fn ($q, $v) => $q->whereDate('tanggal', '<=', $v))
-            ->latest('tanggal')
-            ->paginate(15)
-            ->withQueryString();
-
-        return view('setoran.index', compact('setoran'));
-    }
-
-    public function create(): View
-    {
-        $jenisSampah = JenisSampah::orderBy('nama_jenis')->get();
-
-        return view('setoran.create', compact('jenisSampah'));
-    }
-
     public function store(StoreSetoranRequest $request): RedirectResponse
     {
         $setoran = $this->setoranService->prosesSetoran(
@@ -46,7 +26,7 @@ class SetoranController extends Controller
         );
 
         return redirect()
-            ->route('setoran.show', $setoran)
+            ->route('petugas.setoran.show', $setoran)
             ->with('sukses', 'Setoran berhasil dicatat, saldo nasabah sudah diupdate.');
     }
 
@@ -57,7 +37,7 @@ class SetoranController extends Controller
         return view('setoran.show', compact('setoran'));
     }
 
-    public function cariNasabah(Request $request): \Illuminate\Http\JsonResponse
+    public function cariNasabah(Request $request): JsonResponse
     {
         $nasabah = Nasabah::query()
             ->where('nama', 'like', "%{$request->q}%")

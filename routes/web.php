@@ -13,7 +13,7 @@ Route::redirect('/', '/login');
 
 /*
 |--------------------------------------------------------------------------
-| Login 
+| Login
 |--------------------------------------------------------------------------
 */
 Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -21,7 +21,7 @@ Route::post('/login', [LoginController::class, 'store']);
 
 /*
 |--------------------------------------------------------------------------
-| Area Nasabah 
+| Area Nasabah
 |--------------------------------------------------------------------------
 */
 Route::prefix('nasabah')->name('nasabah.')->middleware('auth:nasabah')->group(function () {
@@ -34,12 +34,13 @@ Route::prefix('nasabah')->name('nasabah.')->middleware('auth:nasabah')->group(fu
 
 /*
 |--------------------------------------------------------------------------
-| Area Petugas 
+| Area Petugas
 |--------------------------------------------------------------------------
 */
 Route::prefix('petugas')->name('petugas.')->middleware('auth:web')->group(function () {
     Route::get('/dashboard', [PetugasController::class, 'dashboard'])->name('dashboard');
     Route::get('/setoran', [PetugasController::class, 'setoran'])->name('setoran');
+    Route::get('/setoran/{setoran}', [SetoranController::class, 'show'])->name('setoran.show');
     Route::get('/nasabah', [PetugasController::class, 'nasabah'])->name('nasabah');
     Route::get('/jenis-sampah', [PetugasController::class, 'jenisSampah'])->name('jenis-sampah');
     Route::get('/riwayat', [PetugasController::class, 'riwayat'])->name('riwayat');
@@ -55,7 +56,7 @@ Route::prefix('petugas')->name('petugas.')->middleware('auth:web')->group(functi
 
 /*
 |--------------------------------------------------------------------------
-| Area Admin 
+| Area Admin
 |--------------------------------------------------------------------------
 */
 Route::prefix('admin')->name('admin.')->middleware(['auth:web', 'role:admin'])->group(function () {
@@ -70,4 +71,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:web', 'role:admin'])->
     Route::post('/jenis-sampah/simpan', [JenisSampahController::class, 'store'])->name('jenis-sampah.store');
     Route::put('/jenis-sampah/{jenis_sampah}', [JenisSampahController::class, 'update'])->name('jenis-sampah.update');
     Route::delete('/jenis-sampah/{jenis_sampah}', [JenisSampahController::class, 'destroy'])->name('jenis-sampah.destroy');
+
+    Route::post('/akun/simpan', [AdminController::class, 'storeAkun'])->name('akun.store');
+    Route::put('/akun/{user}', [AdminController::class, 'updateAkun'])->name('akun.update');
+    Route::delete('/akun/{user}', [AdminController::class, 'destroyAkun'])->name('akun.destroy');
 });

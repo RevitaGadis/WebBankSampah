@@ -6,17 +6,9 @@ use App\Http\Requests\StoreJenisSampahRequest;
 use App\Http\Requests\UpdateJenisSampahRequest;
 use App\Models\JenisSampah;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class JenisSampahController extends Controller
 {
-    public function index(): View
-    {
-        $jenisSampah = JenisSampah::orderBy('nama_jenis')->paginate(10);
-
-        return view('jenis-sampah.index', compact('jenisSampah'));
-    }
-
     public function store(StoreJenisSampahRequest $request): RedirectResponse
     {
         JenisSampah::create($request->validated());
