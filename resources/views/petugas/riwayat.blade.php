@@ -5,10 +5,6 @@
             <h1 class="text-4xl font-bold leading-tight">Riwayat Transaksi &amp;<br>Pembukuan Setoran</h1>
             <p class="mt-1 max-w-2xl text-[#695b51]">Rekapitulasi seluruh setoran sampah masuk, audit mutasi saldo nasabah, dan ekspor laporan berkala unit sekolah.</p>
         </div>
-        <div class="flex gap-3">
-            <button type="button" class="flex items-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-bold"><i class="bi bi-printer"></i> Cetak Buku Kas</button>
-            <button type="button" class="flex items-center gap-2 rounded-lg bg-[#92591f] px-4 py-3 text-sm font-bold text-white"><i class="bi bi-download"></i> Unduh Rekap Laporan (PDF/Excel)</button>
-        </div>
     </div>
 
     <section class="mt-8 grid gap-4 md:grid-cols-4">
@@ -73,7 +69,7 @@
                             <td class="px-4 py-5 text-right font-bold text-[#92591f]">Rp {{ $t['total'] }}</td>
                             <td class="px-4 py-5">{{ $t['officer'] }}</td>
                             <td class="px-4 py-5 text-center">
-                                <button type="button" title="Lihat detail transaksi" data-admin-transaction-open data-id="{{ $t['id'] }}" data-date="{{ $t['date'] }}" data-time="{{ $t['time'] }}" data-name="{{ $t['name'] }}" data-number="{{ $t['number'] ?? '' }}" data-class="{{ $t['class'] }}" data-jenis="{{ $t['jenis'] }}" data-weight="{{ $t['weight'] }}" data-price="{{ $t['price'] }}" data-total="{{ $t['total'] }}" data-officer="{{ $t['officer'] }}" data-phone="{{ $t['phone'] ?? '-' }}" class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#f4ecd7] text-sm font-bold text-[#713b18] hover:bg-[#eadcc5]"><i class="bi bi-eye"></i></button>
+                                <button type="button" title="Lihat detail transaksi" data-admin-transaction-open data-id="{{ $t['id'] }}" data-date="{{ $t['date'] }}" data-time="{{ $t['time'] }}" data-name="{{ $t['name'] }}" data-number="{{ $t['number'] ?? '' }}" data-class="{{ $t['class'] }}" data-jenis="{{ $t['jenis'] }}" data-weight="{{ $t['weight'] }}" data-price="{{ $t['price'] }}" data-total="{{ $t['total'] }}" data-officer="{{ $t['officer'] }}" data-phone="{{ $t['phone'] ?? '-' }}" data-balance-before="{{ $t['balance_before'] ?? '' }}" data-balance-after="{{ $t['balance_after'] ?? '' }}" class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#f4ecd7] text-sm font-bold text-[#713b18] hover:bg-[#eadcc5]"><i class="bi bi-eye"></i></button>
                             </td>
                         </tr>
                     @endforeach

@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll(open).forEach((button) => button.addEventListener('click', () => toggle(document.querySelector(modal), 'hidden', display)));
         document.querySelectorAll(close).forEach((button) => button.addEventListener('click', () => toggle(document.querySelector(modal), display, 'hidden')));
     };
+    // Mengisi action form dari template URL (route() Blade), bukan dari string manual.
+    const setFormAction = (selector, id) => {
+        const form = document.querySelector(selector);
+        if (form?.dataset.actionTemplate && id) {
+            form.action = form.dataset.actionTemplate.replace('__ID__', encodeURIComponent(id));
+        }
+    };
     bindModal('[data-logout-open]', '[data-logout-modal]', '[data-logout-close]');
     bindModal('[data-petugas-logout-open]', '[data-petugas-logout-modal]', '[data-petugas-logout-close]');
     document.querySelector('[data-sidebar-open]')?.addEventListener('click', () => document.querySelector('#nasabah-sidebar')?.classList.toggle('-translate-x-full'));
@@ -22,6 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
         toggle(nasabahModal, 'hidden', 'block');
     }));
     document.querySelectorAll('[data-nasabah-detail-close]').forEach((button) => button.addEventListener('click', () => toggle(nasabahModal, 'block', 'hidden')));
+    const isiDariDataset = (button, modal, prefix, fields) => {
+        fields.forEach((field) => {
+            const camel = field.replace(/-([a-z])/g, (_, l) => l.toUpperCase());
+            modal?.querySelectorAll(
+                `[data-${prefix}-${field}], [data-${prefix}-${field}-copy], [data-${prefix}-${field}-third]`
+            ).forEach((el) => { el.textContent = button.dataset[camel] || '—'; });
+        });
+    };
+
+    document.querySelectorAll('[data-petugas-detail-open]').forEach((button) =>
+        button.addEventListener('click', () =>
+            isiDariDataset(button, document.querySelector('[data-petugas-detail-modal]'), 'pd',
+                ['id', 'name', 'weight', 'officer', 'jenis', 'price', 'total', 'balance-before', 'balance-after'])));
+
+    document.querySelectorAll('[data-receipt-open]').forEach((button) =>
+        button.addEventListener('click', () =>
+            isiDariDataset(button, document.querySelector('[data-receipt-modal]'), 'receipt',
+                ['date', 'time', 'total', 'id', 'jenis', 'detail', 'weight', 'price',
+                'balance-before', 'balance', 'officer'])));
 
     const adminTransactionModal = document.querySelector('[data-admin-transaction-modal]');
     const closeAdminTransactionModal = () => toggle(adminTransactionModal, 'flex', 'hidden');
@@ -53,8 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const values = Object.keys(activeAdminNasabah).length ? activeAdminNasabah : rowData;
         Object.entries(values).forEach(([field, value]) => {
             modal?.querySelectorAll(`[data-an-${field}]`).forEach((element) => element.textContent = value);
-            modal?.querySelectorAll(`[data-an-input-${field}]`).forEach((element) => { element.value = value; });
+            modal?.querySelectorAll(`[data-an-input-${field}]`).forEach((element) => { element.value = value === '-' ? '' : value; });
         });
+        setFormAction('#form-edit-nasabah', values.id);
+        setFormAction('#form-delete-nasabah', values.id);
         const rekapLink = modal?.querySelector('[data-an-rekap]');
         if (rekapLink) {
             const num = values.number || '';
@@ -116,6 +144,10 @@ document.addEventListener('DOMContentLoaded', () => {
             modal?.querySelectorAll(`[data-aw-${field}]`).forEach((element) => element.textContent = value);
             modal?.querySelectorAll(`[data-aw-input-${field}]`).forEach((element) => { element.value = value; });
         });
+        const priceInput = modal?.querySelector('[data-aw-input-price]');
+        if (priceInput && values.priceRaw !== undefined) priceInput.value = values.priceRaw;
+        setFormAction('#form-edit-waste', values.id);
+        setFormAction('#form-delete-waste', values.id);
         if (modal) {
             closeAdminWasteModals();
             toggle(modal, 'hidden', 'flex');
@@ -155,6 +187,11 @@ document.addEventListener('DOMContentLoaded', () => {
             modal?.querySelectorAll(`[data-aa-${field}]`).forEach((element) => element.textContent = value);
             modal?.querySelectorAll(`[data-aa-input-${field}]`).forEach((element) => { element.value = value; });
         });
+        setFormAction('#form-edit-akun', values.id);
+        setFormAction('#form-delete-akun', values.id);
+        if (button.dataset.adminAccountOpen === 'edit' && modal) {
+            modal?.querySelector(`[data-account-role="${values.roleValue || 'petugas'}"]`)?.click();
+        }
         if (modal) {
             closeAdminAccountModals();
             toggle(modal, 'hidden', 'flex');
@@ -168,20 +205,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.key === 'Escape' && adminAccountModals.some((modal) => modal.classList.contains('flex'))) closeAdminAccountModals();
     });
 
-    const accountRoleInput = document.querySelector('[data-admin-account-role-input]');
-    const accountRoleButtons = [...document.querySelectorAll('[data-account-role]')];
-    accountRoleButtons.forEach((button) => button.addEventListener('click', () => {
-        if (accountRoleInput) accountRoleInput.value = button.dataset.accountRole;
-        accountRoleButtons.forEach((option) => {
-            const isActive = option === button;
-            option.setAttribute('aria-pressed', String(isActive));
-            option.classList.toggle('bg-[#92591f]', isActive);
-            option.classList.toggle('text-white', isActive);
-            option.classList.toggle('text-[#3d2417]', !isActive);
-            option.classList.toggle('font-bold', isActive);
-            option.classList.toggle('font-medium', !isActive);
-        });
-    }));
+    // Setiap modal (tambah/edit) punya input peran dan tombol sendiri.
+    adminAccountModals.forEach((modal) => {
+        const roleInput = modal.querySelector('[data-admin-account-role-input]');
+        const roleButtons = [...modal.querySelectorAll('[data-account-role]')];
+        roleButtons.forEach((button) => button.addEventListener('click', () => {
+            if (roleInput) roleInput.value = button.dataset.accountRole;
+            roleButtons.forEach((option) => {
+                const isActive = option === button;
+                option.setAttribute('aria-pressed', String(isActive));
+                option.classList.toggle('bg-[#92591f]', isActive);
+                option.classList.toggle('text-white', isActive);
+                option.classList.toggle('text-[#3d2417]', !isActive);
+                option.classList.toggle('font-bold', isActive);
+                option.classList.toggle('font-medium', !isActive);
+            });
+        }));
+    });
 
     const accountStatusButtons = [...document.querySelectorAll('[data-account-status]')];
     accountStatusButtons.forEach((button) => button.addEventListener('click', () => {
@@ -231,6 +271,8 @@ document.addEventListener('DOMContentLoaded', () => {
             empty?.classList.toggle('hidden', count !== 0);
         });
     });
+
+    document.querySelectorAll('[data-flash]').forEach((el) => setTimeout(() => el.remove(), 4000));
 });
 
 const setoranCariInput = document.querySelector('#setoran-cari-nasabah');
@@ -247,18 +289,27 @@ setoranCariInput?.addEventListener('input', () => {
         return;
     }
     setoranDebounce = setTimeout(async () => {
-        const res = await fetch(`/petugas/setoran/cari-nasabah?q=${encodeURIComponent(q)}`);
+        const base = setoranCariInput.dataset.url || '/petugas/setoran/cari-nasabah';
+        const res = await fetch(`${base}?q=${encodeURIComponent(q)}`, { headers: { Accept: 'application/json' } });
+        if (!res.ok) return;
         const data = await res.json();
-        setoranHasilDiv.innerHTML = data.map((n) => `
-            <div class="cursor-pointer px-4 py-2 text-sm hover:bg-[#fcf3dd]" data-pilih='${JSON.stringify(n)}'>
-                <b>${n.nama}</b> <small class="text-[#695b51]">${n.no_nasabah} • ${n.kelas}</small>
-            </div>
-        `).join('') || '<div class="px-4 py-2 text-sm text-[#695b51]">Tidak ketemu</div>';
-        setoranHasilDiv.classList.remove('hidden');
-
-        setoranHasilDiv.querySelectorAll('[data-pilih]').forEach((el) => {
-            el.addEventListener('click', () => {
-                const n = JSON.parse(el.dataset.pilih);
+        setoranHasilDiv.replaceChildren();
+        if (!data.length) {
+            const empty = document.createElement('div');
+            empty.className = 'px-4 py-2 text-sm text-[#695b51]';
+            empty.textContent = 'Tidak ketemu';
+            setoranHasilDiv.append(empty);
+        }
+        data.forEach((n) => {
+            const row = document.createElement('div');
+            row.className = 'cursor-pointer px-4 py-2 text-sm hover:bg-[#fcf3dd]';
+            const nama = document.createElement('b');
+            nama.textContent = n.nama;
+            const info = document.createElement('small');
+            info.className = 'ml-1 text-[#695b51]';
+            info.textContent = `${n.no_nasabah} • ${n.kelas}`;
+            row.append(nama, info);
+            row.addEventListener('click', () => {
                 setoranIdNasabahInput.value = n.id_nasabah;
                 setoranCariInput.value = `${n.nama} (${n.no_nasabah})`;
                 document.querySelector('#snt-nama').textContent = n.nama;
@@ -267,7 +318,9 @@ setoranCariInput?.addEventListener('input', () => {
                 setoranTerpilihDiv.classList.remove('hidden');
                 setoranHasilDiv.classList.add('hidden');
             });
+            setoranHasilDiv.append(row);
         });
+        setoranHasilDiv.classList.remove('hidden');
     }, 300);
 });
 
@@ -301,14 +354,4 @@ document.addEventListener('click', (event) => {
     if (setoranHasilDiv && !setoranHasilDiv.contains(event.target) && event.target !== setoranCariInput) {
         setoranHasilDiv.classList.add('hidden');
     }
-});
-
-document.querySelectorAll('[data-admin-waste-open="edit"], [data-admin-waste-open="delete"]').forEach((button) => {
-    button.addEventListener('click', () => {
-        const id = button.dataset.id;
-        const formEdit = document.querySelector('#form-edit-waste');
-        const formDelete = document.querySelector('#form-delete-waste');
-        if (formEdit) formEdit.action = `/admin/jenis-sampah/${id}`;
-        if (formDelete) formDelete.action = `/admin/jenis-sampah/${id}`;
-    });
 });

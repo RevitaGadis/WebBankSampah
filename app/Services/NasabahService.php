@@ -9,15 +9,19 @@ class NasabahService
 {
     public function buatNasabah(array $data): Nasabah
     {
-        return Nasabah::create([
+        $nasabah = new Nasabah([
             'no_nasabah' => $this->generateNoNasabah(),
             'nama' => $data['nama'],
             'kelas' => $data['kelas'],
             'no_hp' => $data['no_hp'] ?? null,
-            'password' => Hash::make($data['pin']),
             'saldo' => 0,
         ]);
-    }
+
+        $nasabah->password = $data['pin'];
+        $nasabah->save();
+
+    return $nasabah;
+}
 
     public function updateNasabah(Nasabah $nasabah, array $data): Nasabah
     {

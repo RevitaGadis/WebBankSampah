@@ -32,6 +32,8 @@ class TransactionFormatter
 
     public static function forNasabah(Setoran $s): array
     {
+        $balanceAfter = self::saldoSampai($s);
+
         return [
             'id' => 'TRX-' . str_pad((string) $s->id_setoran, 4, '0', STR_PAD_LEFT),
             'date' => $s->tanggal->format('d/m/Y'),
@@ -43,7 +45,8 @@ class TransactionFormatter
             'officer' => $s->petugas->nama,
             'initial' => strtoupper(substr($s->petugas->nama, 0, 2)),
             'detail' => $s->jenisSampah->nama_jenis . ' - ' . number_format((float) $s->berat, 1) . ' Kg',
-            'balance' => number_format((float) $s->nasabah->saldo, 0, ',', '.'),
+            'balance_before' => number_format($balanceAfter - (float) $s->total, 0, ',', '.'),
+            'balance' => number_format($balanceAfter, 0, ',', '.'),
         ];
     }
 

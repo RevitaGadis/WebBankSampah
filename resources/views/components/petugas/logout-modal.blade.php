@@ -6,7 +6,7 @@
         <p class="mt-2 text-sm text-[#695b51]">Sesi petugas akan diakhiri. Pastikan seluruh pencatatan setoran sudah
             tersimpan.</p>
         <div class="mt-5 rounded-xl bg-[#fcf3dd] p-4 text-left"><b
-                class="block">{{ $officer['name'] }}</b><small>{{ $officer['role'] }} • Unit SMK Hijau</small></div>
+                class="block">{{ $officer['name'] }}</b><small>{{ $officer['role'] }} • Unit SMKN 2 Cimahi</small></div>
         <div class="mt-5 grid grid-cols-2 gap-3"><button data-petugas-logout-close
                 class="rounded-lg bg-[#eee6d2] py-3 text-sm font-bold">Batal</button>
             <form method="POST" action="{{ route('petugas.logout') }}">@csrf<button

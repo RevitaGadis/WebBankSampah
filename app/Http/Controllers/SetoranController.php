@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSetoranRequest;
 use App\Models\Nasabah;
-use App\Models\Setoran;
 use App\Services\SetoranService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
 
 class SetoranController extends Controller
 {
@@ -20,21 +18,14 @@ class SetoranController extends Controller
 
     public function store(StoreSetoranRequest $request): RedirectResponse
     {
-        $setoran = $this->setoranService->prosesSetoran(
+        $this->setoranService->prosesSetoran(
             $request->validated(),
-            Auth::guard('web')->id()
+            Auth::guard('web')->user()->id_user
         );
 
         return redirect()
-            ->route('petugas.setoran.show', $setoran)
+            ->route('petugas.setoran')
             ->with('sukses', 'Setoran berhasil dicatat, saldo nasabah sudah diupdate.');
-    }
-
-    public function show(Setoran $setoran): View
-    {
-        $setoran->load(['nasabah', 'jenisSampah', 'petugas']);
-
-        return view('setoran.show', compact('setoran'));
     }
 
     public function cariNasabah(Request $request): JsonResponse

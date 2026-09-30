@@ -14,7 +14,7 @@
 
             <label class="ns-label">Pilih Nasabah *</label>
             <div class="relative mt-2">
-                <input type="text" id="setoran-cari-nasabah" autocomplete="off" placeholder="Ketik nama atau no. nasabah..."
+                <input type="text" id="setoran-cari-nasabah" data-url="{{ route('petugas.setoran.cari-nasabah') }}" autocomplete="off" placeholder="Ketik nama atau no. nasabah..."
                     class="ns-input">
                 <input type="hidden" name="id_nasabah" id="setoran-id-nasabah" required>
 

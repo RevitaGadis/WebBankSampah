@@ -10,7 +10,21 @@
 
 <body><x-petugas.sidebar :officer="$officer" />
     <div class="min-h-screen lg:pl-[268px]"><x-petugas.navbar :officer="$officer" />
-        <main class="petugas-content mx-auto max-w-[1320px] p-5 lg:p-8">{{ $slot }}</main>
+    <main class="petugas-content mx-auto max-w-[1320px] p-5 lg:p-8">
+        @if(session('sukses'))
+            <div data-flash class="mb-4 rounded-xl bg-[#dce9c9] p-4 text-sm font-semibold text-[#2f4a12]">
+                {{ session('sukses') }}
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="mb-4 rounded-xl bg-red-50 p-4 text-sm font-semibold text-red-700">
+                {{ $errors->first() }}
+            </div>
+        @endif
+
+        {{ $slot }}
+    </main>
     </div><x-petugas.logout-modal :officer="$officer" />
 </body>
 

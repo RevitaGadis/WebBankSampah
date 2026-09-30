@@ -5,10 +5,6 @@
             <h1 class="text-4xl font-bold leading-tight">Riwayat Transaksi &amp;<br>Pembukuan Setoran</h1>
             <p class="mt-1 max-w-2xl text-[#695b51]">Rekapitulasi seluruh setoran sampah masuk, audit mutasi saldo nasabah, dan ekspor laporan berkala unit sekolah.</p>
         </div>
-        <div class="flex gap-3">
-            <button type="button" class="flex items-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-bold"><i class="bi bi-printer"></i> Cetak Buku Kas</button>
-            <button type="button" class="flex items-center gap-2 rounded-lg bg-[#92591f] px-4 py-3 text-sm font-bold text-white"><i class="bi bi-download"></i> Unduh Rekap Laporan (PDF/Excel)</button>
-        </div>
     </div>
 
     <section class="mt-8 grid gap-4 md:grid-cols-4">

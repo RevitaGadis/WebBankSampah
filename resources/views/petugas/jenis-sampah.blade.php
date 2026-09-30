@@ -1,7 +1,6 @@
 <x-layouts.petugas title="Jenis Sampah" :officer="$officer">
     <div class="flex flex-wrap justify-between gap-4">
         <div><h1 class="text-4xl font-bold">Kelola Jenis Sampah & Tarif Komoditas</h1><p class="mt-1 max-w-2xl text-[#695b51]">Atur katalog komoditas daur ulang yang diterima, perbarui tarif acuan beli per satuan.</p></div>
-        <button type="button" class="rounded-lg bg-[#f4ecd7] px-4 py-3 text-sm font-bold">Download Katalog SK (PDF)</button>
     </div>
     <section class="ns-card mt-8 overflow-hidden">
         <div class="p-5">

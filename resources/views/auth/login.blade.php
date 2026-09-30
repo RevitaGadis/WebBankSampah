@@ -54,8 +54,7 @@
                     <label class="ns-label mt-7 block">Username / No. Nasabah</label>
                     <input class="ns-input mt-2" value="{{ old('identitas') }}" name="identitas" autocomplete="username" required autofocus>
 
-                    <div class="mt-4 flex justify-between"><label class="ns-label">Kata Sandi</label><a href="#"
-                            class="text-xs text-[#92591f]">Lupa Kata Sandi?</a></div>
+                    <div class="mt-4 flex justify-between"><label class="ns-label">Kata Sandi</label></div>
                     <div class="relative mt-2"><input id="password" class="ns-input pr-12" type="password"
                             name="password" autocomplete="current-password" required><button
                             data-password-toggle type="button"
