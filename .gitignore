@@ -1,0 +1,43 @@
+# Dependencies
+/node_modules
+/vendor
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Laravel
+/public/build
+/public/hot
+/storage/*.key
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+
+# Database
+/database/*.sqlite
+/database/*.sqlite3
+
+# Testing
+.phpunit.result.cache
+/coverage
+
+# IDE / OS
+.idea
+.vscode
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
