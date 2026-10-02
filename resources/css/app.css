@@ -35,12 +35,10 @@
     .ns-nav-link.active { @apply bg-[#955a25] text-white shadow-sm; }
 }
 
-/* Ikon hanya dipertahankan di sidebar petugas/nasabah sesuai rancangan. */
-.petugas-content i,
-body:has(#petugas-sidebar) > div > header i { display: none; }
-
-/* Ikon tindakan tabel tetap terlihat; ikon dekoratif konten tetap disembunyikan. */
-.petugas-content table button i { display: inline; }
+/* Baris tabel yang tidak masuk halaman aktif disembunyikan oleh pagination. */
+.ns-page-off {
+    display: none;
+}
 
 /* Aksi struk tetap memiliki tampilan yang sama saat ditekan. */
 .table-action-stable:hover,

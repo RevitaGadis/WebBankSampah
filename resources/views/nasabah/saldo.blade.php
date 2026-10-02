@@ -12,9 +12,9 @@
         <p class="mt-5 text-sm">▣ {{ $student['number'] }}　•　Atas Nama: {{ $student['name'] }}</p>
     </section>
     <section class="mt-8 grid gap-4 md:grid-cols-3"><x-nasabah.stat-card label="Total Transaksi" value="{{ $student['count'] ?? '12 Transaksi' }}"
-            description="{{ $stats['totalTransactionsDesc'] ?? 'Setoran sampah terverifikasi' }}" /><x-nasabah.stat-card label="Berat Sampah Terkumpul"
-            value="{{ $stats['totalWeight'] ?? '24,5 Kg' }}" description="{{ $stats['totalWeightDesc'] ?? 'Terkonversi ke circular economy' }}" /><x-nasabah.stat-card
-            label="Total Pendapatan" value="Rp {{ $student['balance'] ?? '42.500' }}" description="{{ $stats['totalIncomeDesc'] ?? 'Kumulatif kredit masuk aktif' }}" /></section>
+            description="{{ $stats['totalTransactionsDesc'] ?? 'Setoran sampah terverifikasi' }}" icon="bi-receipt" accent="#92591f" /><x-nasabah.stat-card label="Berat Sampah Terkumpul"
+            value="{{ $stats['totalWeight'] ?? '24,5 Kg' }}" description="{{ $stats['totalWeightDesc'] ?? 'Terkonversi ke circular economy' }}" icon="bi-recycle" accent="#bdcaa8" /><x-nasabah.stat-card
+            label="Total Pendapatan" value="Rp {{ $student['balance'] ?? '42.500' }}" description="{{ $stats['totalIncomeDesc'] ?? 'Kumulatif kredit masuk aktif' }}" icon="bi-wallet2" desc-icon="bi-wallet2" accent="#ffb980" /></section>
     <section class="ns-card mt-8 p-7">
         <div class="flex justify-between">
             <div>

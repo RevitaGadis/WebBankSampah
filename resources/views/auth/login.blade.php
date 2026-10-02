@@ -21,8 +21,8 @@
                 <h1 class="relative max-w-sm text-4xl font-bold leading-[1.1]">Kelola Sampah,<br>Tumbuhkan Tabungan.
                 </h1>
                 <p class="relative mt-14 max-w-sm text-sm leading-6 text-[#e0c7b2]">Platform tata kelola timbang sampah
-                    terpadu untuk menanamkan literasi sirkular ekonomi dan tabungan masa depan warga SMK Negeri Hijau
-                    Lestari.</p>
+                    terpadu untuk menanamkan literasi sirkular ekonomi dan tabungan masa depan warga SMKN 2 Cimahi
+                    </p>
                 <div class="relative mt-16 space-y-4">
                     <div class="rounded-2xl border border-white/15 bg-[#6b351a] p-4"><b class="block text-sm">◉ &nbsp;
                             Penimbangan Terverifikasi ISO</b><small class="ml-6 block text-[#d9b9a0]">Timbangan digital
@@ -33,29 +33,42 @@
                 </div>
                 <div
                     class="absolute bottom-6 left-9 right-9 flex justify-between border-t border-white/15 pt-6 text-xs text-[#d8bba4]">
-                    <span>Versi Sistem 2.4.0–PROD</span><span>SMKN 2 Cimahi © 2026</span></div>
+                    <span>Rahma - Revita - Yunifa</span><span>SMKN 2 Cimahi © 2026</span></div>
             </div>
             <div class="flex items-center justify-center p-8 lg:p-16">
-                <form class="w-full max-w-md" onsubmit="return false">
+                <form class="w-full max-w-md" method="POST" action="{{ route('login') }}">
+                    @csrf
                     <h2 class="text-center text-3xl font-bold">Masuk ke Sistem</h2>
+
+                    @if($errors->any())
+                        <div class="mt-6 rounded-xl border border-red-200 bg-red-50 p-4 text-xs font-semibold text-red-700">
+                            {{ $errors->first() }}
+                        </div>
+                    @endif
+
                     <div
-                        class="mt-12 rounded-xl border border-[#e1d8c2] bg-[#f8f4e8] p-4 text-xs font-semibold leading-4">
+                        class="mt-6 rounded-xl border border-[#e1d8c2] bg-[#f8f4e8] p-4 text-xs font-semibold leading-4">
                         ◉ &nbsp; Akses Operasional: Digunakan oleh petugas piket, koordinator bank sampah, dan
-                        administrator sekolah.</div><label class="ns-label mt-7 block">Username</label><input
-                        class="ns-input mt-2" value="budi.santoso" name="username" autocomplete="username">
-                    <div class="mt-4 flex justify-between"><label class="ns-label">Kata Sandi</label><a href="#"
-                            class="text-xs text-[#92591f]">Lupa Kata Sandi?</a></div>
+                        administrator sekolah, maupun nasabah (login pakai No. Nasabah).</div>
+
+                    <label class="ns-label mt-7 block">Username / No. Nasabah</label>
+                    <input class="ns-input mt-2" value="{{ old('identitas') }}" name="identitas" autocomplete="username" required autofocus>
+
+                    <div class="mt-4 flex justify-between"><label class="ns-label">Kata Sandi</label></div>
                     <div class="relative mt-2"><input id="password" class="ns-input pr-12" type="password"
-                            value="BankSampah2026!" name="password" autocomplete="current-password"><button
+                            name="password" autocomplete="current-password" required><button
                             data-password-toggle type="button"
-                            class="absolute inset-y-0 right-3 text-[#92591f]">◉</button></div><a
-                        href="{{ route('nasabah.dashboard') }}"
-                        class="mt-4 block rounded-xl bg-[#a66a35] py-3 text-center text-sm font-bold text-white shadow-md">Masuk
-                        ke Sistem &nbsp; →</a>
+                            class="absolute inset-y-0 right-3 text-[#92591f]">◉</button></div>
+
+                    <button type="submit"
+                        class="mt-4 block w-full rounded-xl bg-[#a66a35] py-3 text-center text-sm font-bold text-white shadow-md">
+                        Masuk ke Sistem &nbsp; →
+                    </button>
+
                     <hr class="my-6 border-[#eee7d8]">
                     <div class="rounded-xl border border-[#e5ddca] bg-[#faf7ed] p-4 text-xs leading-5"><b>● &nbsp; Belum
                             memiliki akun nasabah?</b><br><span class="ml-5">Buku tabungan dan akses akun digital
-                            diterbitkan di ruang piket Bank Sampah Gedung C oleh pengurus sekolah.</span></div>
+                            diterbitkan di ruang operator Bank Sampah oleh pengurus sekolah.</span></div>
                 </form>
             </div>
         </section>

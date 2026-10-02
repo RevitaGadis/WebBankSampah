@@ -31,7 +31,7 @@
                         class="text-[#92591f]"></b><span data-receipt-detail></span><b>Berat Bersih (Netto)</b><strong
                         class="text-xl"><span data-receipt-weight></span> Kg</strong><span>Timbangan Digital Loket
                         A</span><b>Tarif Resmi Sekolah</b><span>Rp <span data-receipt-price></span> /
-                        Kg</span><span>Katalog SK September 2026</span></div>
+                        Kg</span><span>Katalog SK </span></div>
                 <div class="grid grid-cols-3 border-t border-[#eee2cb] p-5 font-bold"><span>Kalkulasi
                         Konversi</span><span class="font-mono"><span data-receipt-weight-copy></span> Kg × Rp <span
                             data-receipt-price-copy></span></span><span class="text-right text-xl text-[#92591f]">Rp

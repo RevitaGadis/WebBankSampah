@@ -25,7 +25,6 @@
                 </div>
             </div>
         </div>
-        <footer class="flex justify-end border-t bg-[#fcf7e9] p-5"><button onclick="window.print()"
-                class="rounded-lg bg-[#92591f] px-5 py-2 text-sm font-bold text-white">⇩ Unduh PDF</button></footer>
+        <footer class="flex justify-end border-t bg-[#fcf7e9] p-5"><button onclick="window.print()" class="rounded-lg bg-[#92591f] px-5 py-2 text-sm font-bold text-white">Unduh PDF</button></footer>
     </section>
 </div>
