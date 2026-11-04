@@ -7,7 +7,7 @@
     </div>
     <section class="ns-card mt-8 overflow-hidden">
         <div class="p-5">
-            <x-admin.table-search :icon="false" placeholder="Cari jenis sampah, tarif..." target="[data-admin-waste-rows] tr" empty="[data-admin-waste-empty]" />
+            <x-admin.table-search placeholder="Cari jenis sampah, tarif..." target="[data-admin-waste-rows] tr" empty="[data-admin-waste-empty]" />
         </div>
     </section>
     <section class="ns-card mt-4 overflow-hidden">

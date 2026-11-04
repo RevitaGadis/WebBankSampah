@@ -270,7 +270,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const query = input.value.toLowerCase().trim();
             let count = 0;
             rows.forEach((row) => {
-                const visible = row.textContent.toLowerCase().includes(query);
+                const searchable = (row.dataset.search || row.textContent).toLowerCase();
+                const visible = searchable.includes(query);
                 row.classList.toggle('hidden', !visible);
                 if (visible) count += 1;
             });
@@ -280,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     bindTextSearch('[data-admin-account-search]', '[data-admin-account-rows] tr', '[data-admin-account-empty]');
     bindTextSearch('[data-admin-history-search]', '.ns-card table tbody tr', '[data-admin-history-empty]');
+    bindTextSearch('#nasabah-riwayat-search', '[data-nasabah-riwayat-rows] tr:not([data-page-ignore])', '[data-nasabah-riwayat-empty]');
 
     document.querySelectorAll('[data-admin-global-search]').forEach((input) => {
         const rows = [...document.querySelectorAll(input.dataset.searchTarget)];
@@ -297,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
             refreshPagination();
         });
     });
+
 
     document.querySelectorAll('[data-flash]').forEach((el) => setTimeout(() => el.remove(), 4000));
 });

@@ -19,7 +19,7 @@
     </section>
     <section class="ns-card mt-4 overflow-hidden">
         <div class="p-5">
-            <x-admin.table-search :icon="false" placeholder="Cari ID, nasabah, kelas..." target="[data-admin-dashboard-rows] tr" empty="[data-admin-dashboard-empty]" />
+            <x-admin.table-search placeholder="Cari ID, nasabah, kelas..." target="[data-admin-dashboard-rows] tr" empty="[data-admin-dashboard-empty]" />
         </div>
         <x-petugas.transaction-table :transactions="$transactions" rows="data-admin-dashboard-rows" />
         <p data-admin-dashboard-empty class="hidden p-6 text-center text-sm text-[#695b51]">Tidak ada transaksi yang sesuai dengan pencarian.</p>

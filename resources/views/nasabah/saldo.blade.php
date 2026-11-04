@@ -3,13 +3,13 @@
     <h1 class="mt-1 text-4xl font-bold">Saldo Saya</h1>
     <p class="mt-1 text-[#695b51]">Pantau akumulasi saldo buku tabungan sampah dan ringkasan mutasi kredit kamu secara
         transparan dan berkala.</p>
-    <div class="mt-8 rounded-xl bg-[#dce9c9] p-5 font-semibold">♧ &nbsp; Saldo bertambah otomatis setiap kali setoran
+    <div class="mt-8 rounded-xl bg-[#dce9c9] p-5 font-semibold"><i class="bi bi-wallet2"></i> &nbsp; Saldo bertambah otomatis setiap kali setoran
         sampahmu berhasil ditimbang dan dicatat oleh petugas loket Bank Sampah.</div>
     <section class="relative mt-8 overflow-hidden rounded-2xl bg-[#5a270f] p-12 text-white">
         <div class="absolute -right-10 -top-20 size-64 rounded-full bg-[#75401f]"></div><span
-            class="ns-label !text-[#e5c9b0]">● TOTAL SALDO AKTIF SAAT INI</span><strong class="mt-4 block text-4xl">Rp
+            class="ns-label !text-[#e5c9b0]"><i class="bi bi-wallet2"></i> TOTAL SALDO AKTIF SAAT INI</span><strong class="mt-4 block text-4xl">Rp
             {{ $student['balance'] }} <small class="text-sm font-normal text-[#e4c9b1]">IDR</small></strong>
-        <p class="mt-5 text-sm">▣ {{ $student['number'] }}　•　Atas Nama: {{ $student['name'] }}</p>
+        <p class="mt-5 text-sm"><i class="bi bi-people"></i> {{ $student['number'] }}　•　Atas Nama: {{ $student['name'] }}</p>
     </section>
     <section class="mt-8 grid gap-4 md:grid-cols-3"><x-nasabah.stat-card label="Total Transaksi" value="{{ $student['count'] ?? '12 Transaksi' }}"
             description="{{ $stats['totalTransactionsDesc'] ?? 'Setoran sampah terverifikasi' }}" icon="bi-receipt" accent="#92591f" /><x-nasabah.stat-card label="Berat Sampah Terkumpul"
@@ -36,6 +36,6 @@
                             {{ $transaction['balance'] }}</small></div>
             </article>@endforeach
         </div><a href="{{ route('nasabah.riwayat') }}"
-            class="mt-8 block text-right text-sm font-bold text-[#92591f]">Lihat Semua →</a>
+            class="mt-8 block text-right text-sm font-bold text-[#92591f]">Lihat Semua <i class="bi bi-arrow-right"></i></a>
     </section>
 </x-layouts.nasabah>

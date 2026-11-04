@@ -3,7 +3,7 @@
 
     <section class="mt-6 grid gap-4 md:grid-cols-4">
         <x-nasabah.stat-card label="Total Akun Terdaftar" value="{{ $stats['totalAccounts'] ?? '0' }}" icon="bi-people" accent="#92591f" />
-        <x-nasabah.stat-card label="Nasabah Siswa" value="{{ $stats['totalStudentAccounts'] ?? '0' }}" icon="bi-mortarboard" accent="#bdcaa8" />
+        <x-nasabah.stat-card label="Nasabah Siswa" value="{{ $stats['totalStudentAccounts'] ?? '0' }}" icon="bi-people" accent="#bdcaa8" />
         <x-nasabah.stat-card label="Guru & Tendik" value="{{ $stats['totalTeacherAccounts'] ?? '0' }}" icon="bi-person-badge" accent="#ffb980" />
         <x-nasabah.stat-card label="Petugas & Admin" value="{{ $stats['totalStaffAccounts'] ?? '0' }}" icon="bi-person-gear" accent="#dce9c9" />
     </section>
@@ -41,7 +41,7 @@
         <section role="dialog" aria-modal="true" class="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
             <header class="flex items-start justify-between bg-[#fcf3dd] px-6 py-5">
                 <div><h2 class="text-xl font-bold">Tambah Akun Pengguna Baru</h2><p class="text-sm text-[#695b51]">Daftarkan akun petugas piket atau administrator</p></div>
-                <button type="button" data-admin-account-close class="text-2xl text-[#695b51]">&times;</button>
+                <button type="button" data-admin-account-close class="text-2xl text-[#695b51]"><i class="bi bi-x-lg"></i></button>
             </header>
             <form method="POST" action="{{ route('admin.akun.store') }}" class="p-6">
                 @csrf
@@ -69,7 +69,7 @@
         <section role="dialog" aria-modal="true" class="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
             <header class="flex items-start justify-between bg-[#54220f] px-6 py-5 text-white">
                 <div><h2 class="text-xl font-bold">Edit Akun</h2><p class="text-sm text-white/70">Perbarui data akun pengguna</p></div>
-                <button type="button" data-admin-account-close class="text-2xl text-white/70">&times;</button>
+                <button type="button" data-admin-account-close class="text-2xl text-white/70"><i class="bi bi-x-lg"></i></button>
             </header>
             <form method="POST" action="" id="form-edit-akun" data-action-template="{{ route('admin.akun.update', '__ID__') }}" class="p-6">
                 @csrf

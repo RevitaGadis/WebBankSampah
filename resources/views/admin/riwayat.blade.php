@@ -46,7 +46,7 @@
                 </thead>
                 <tbody data-admin-riwayat-rows>
                     @foreach($transactions as $t)
-                        <tr data-search="{{ strtolower($t['id'].' '.$t['name'].' '.$t['class'].' '.$t['jenis'].' '.$t['officer']) }}" class="border-b border-[#f0eadf] even:bg-[#fffdf8]">
+                        <tr data-search="{{ strtolower($t['id'].' '.$t['name'].' '.$t['number'].' '.$t['class'].' '.$t['jenis'].' '.$t['officer']) }}" class="border-b border-[#f0eadf] even:bg-[#fffdf8]">
                             <td class="px-5 py-5 font-mono font-bold text-[#713b18]">{{ $t['id'] }}</td>
                             <td class="px-4 py-5">{{ $t['date'] }}<small class="mt-1 block">{{ $t['time'] }}</small></td>
                             <td class="px-4 py-5">
@@ -82,7 +82,7 @@
                         <p class="mt-0.5 text-xs text-[#695b51]">Rincian bukti penerimaan sampah dan kredit saldo nasabah</p>
                     </div>
                 </div>
-                <button type="button" aria-label="Tutup modal" data-admin-transaction-close class="flex h-7 w-7 items-center justify-center rounded-lg text-lg text-[#695b51] hover:bg-[#f4ecd7]">&times;</button>
+                <button type="button" aria-label="Tutup modal" data-admin-transaction-close class="flex h-7 w-7 items-center justify-center rounded-lg text-lg text-[#695b51] hover:bg-[#f4ecd7]"><i class="bi bi-x-lg"></i></button>
             </header>
             <div class="space-y-3 p-4 sm:p-5">
                 <section class="grid gap-x-4 gap-y-2 rounded-xl bg-[#fcf7e9] p-4 text-[11px] sm:grid-cols-4">

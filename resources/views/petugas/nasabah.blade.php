@@ -8,7 +8,7 @@
     </section>
     <section class="ns-card mt-8 overflow-hidden">
         <div class="p-5">
-            <x-admin.table-search :icon="false" placeholder="Cari nama, no. nasabah, kelas..." target="[data-admin-nasabah-rows] tr" empty="[data-admin-nasabah-empty]" />
+            <x-admin.table-search placeholder="Cari nama, no. nasabah, kelas..." target="[data-admin-nasabah-rows] tr" empty="[data-admin-nasabah-empty]" />
         </div>
         <div class="overflow-x-auto">
             <table class="w-full min-w-[900px] text-sm">

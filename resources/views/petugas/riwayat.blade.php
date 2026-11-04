@@ -23,7 +23,7 @@
 
     <section class="ns-card mt-8 overflow-hidden">
         <div class="p-5">
-            <x-admin.table-search :icon="false" placeholder="Cari transaksi, nasabah, jenis sampah..." target="[data-admin-riwayat-rows] tr" empty="[data-admin-riwayat-empty]" />
+            <x-admin.table-search placeholder="Cari transaksi, nasabah, jenis sampah..." target="[data-admin-riwayat-rows] tr" empty="[data-admin-riwayat-empty]" />
         </div>
     </section>
 
@@ -79,7 +79,7 @@
                     </div>
                     <p class="mt-0.5 text-xs text-[#695b51]">Rincian bukti penerimaan sampah dan kredit saldo nasabah</p>
                 </div>
-                <button type="button" aria-label="Tutup modal" data-admin-transaction-close class="flex h-7 w-7 items-center justify-center rounded-lg text-lg text-[#695b51] hover:bg-[#f4ecd7]">&times;</button>
+                <button type="button" aria-label="Tutup modal" data-admin-transaction-close class="flex h-7 w-7 items-center justify-center rounded-lg text-lg text-[#695b51] hover:bg-[#f4ecd7]"><i class="bi bi-x-lg"></i></button>
             </header>
             <div class="space-y-3 p-4 sm:p-5">
                 <section class="grid gap-x-4 gap-y-2 rounded-xl bg-[#fcf7e9] p-4 text-[11px] sm:grid-cols-4">

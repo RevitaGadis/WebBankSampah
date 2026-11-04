@@ -43,7 +43,7 @@
         <section role="dialog" aria-modal="true" class="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
             <header class="flex items-start justify-between bg-[#fcf3dd] px-6 py-5">
                 <div><h2 class="text-2xl font-bold">Tambah Nasabah Baru</h2><p class="text-sm text-[#695b51]">No. nasabah dibuat otomatis oleh sistem</p></div>
-                <button type="button" data-admin-nasabah-close class="text-2xl text-[#695b51]">&times;</button>
+                <button type="button" data-admin-nasabah-close class="text-2xl text-[#695b51]"><i class="bi bi-x-lg"></i></button>
             </header>
             <form method="POST" action="{{ route('admin.nasabah.store') }}" class="p-6">
                 @csrf
@@ -74,7 +74,7 @@
                     </div>
                     <p class="mt-1 text-sm text-[#695b51]">Informasi rekening buku tabungan, identitas siswa, dan statistik penimbangan terverifikasi.</p>
                 </div>
-                <button type="button" aria-label="Tutup" data-admin-nasabah-close class="text-xl text-[#7a695e]">&times;</button>
+                <button type="button" aria-label="Tutup" data-admin-nasabah-close class="text-xl text-[#7a695e]"><i class="bi bi-x-lg"></i></button>
             </header>
 
             <div class="p-6" data-an-ringkas>
@@ -94,7 +94,7 @@
     {{-- Modal: Edit Nasabah --}}
     <div data-admin-nasabah-modal="edit" class="fixed inset-0 z-[80] hidden items-center justify-center bg-black/80 p-4">
         <section role="dialog" aria-modal="true" class="w-full max-w-xl overflow-hidden rounded-2xl bg-white shadow-2xl">
-            <header class="flex items-start justify-between border-b border-[#eadcc5] bg-[#fff9ea] px-5 py-3"><div><h2 class="text-lg font-bold">Edit Data Nasabah <span data-an-number class="ml-1 rounded bg-[#dce9c9] px-2 py-0.5 text-[10px]"></span></h2></div><button type="button" data-admin-nasabah-close class="text-xl text-[#695b51]">&times;</button></header>
+            <header class="flex items-start justify-between border-b border-[#eadcc5] bg-[#fff9ea] px-5 py-3"><div><h2 class="text-lg font-bold">Edit Data Nasabah <span data-an-number class="ml-1 rounded bg-[#dce9c9] px-2 py-0.5 text-[10px]"></span></h2></div><button type="button" data-admin-nasabah-close class="text-xl text-[#695b51]"><i class="bi bi-x-lg"></i></button></header>
             <form method="POST" action="" id="form-edit-nasabah" data-action-template="{{ route('admin.nasabah.update', '__ID__') }}" class="space-y-3 p-5">
                 @csrf
                 @method('PUT')

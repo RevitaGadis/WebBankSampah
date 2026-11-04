@@ -1,14 +1,14 @@
 <x-layouts.nasabah title="Dashboard" :student="$student">
-    <div class="mb-8"><span class="rounded-full bg-[#dce9c9] px-3 py-1 text-[11px] font-bold">● Nasabah Aktif • Kelas
+    <div class="mb-8"><span class="rounded-full bg-[#dce9c9] px-3 py-1 text-[11px] font-bold"><i class="bi bi-people"></i> Nasabah Aktif • Kelas
             {{ $student['class'] }} • {{ $student['number'] }}</span>
         <h1 class="mt-3 text-4xl font-bold tracking-tight">Selamat datang, {{ $student['name'] }}</h1>
         <p class="mt-1 text-[#695b51]">Pantau saldo dan riwayat setoran sampah kamu di SMKN 2 Cimahi.</p>
     </div>
     <section class="relative overflow-hidden rounded-2xl bg-[#5a270f] p-8 text-[#fff8ed] shadow-xl">
         <div class="absolute -right-12 -bottom-24 size-80 rounded-full bg-[#75401f]"></div><span
-            class="ns-label !text-[#ddc5b0]">▣ &nbsp; SALDO SAYA SAAT INI</span>
+            class="ns-label !text-[#ddc5b0]"><i class="bi bi-wallet2"></i> &nbsp; SALDO SAYA SAAT INI</span>
         <div class="mt-4 flex flex-wrap items-center gap-4"><strong class="text-5xl">Rp
-                {{ $student['balance'] }}</strong><span class="rounded bg-white/15 px-2 py-1 text-xs">↑ {{ $student['last_change'] ?? '+ Rp 7.500' }}</span></div>
+                {{ $student['balance'] }}</strong><span class="rounded bg-white/15 px-2 py-1 text-xs"><i class="bi bi-arrow-up-right"></i> {{ $student['last_change'] ?? '+ Rp 7.500' }}</span></div>
         <p class="mt-2 max-w-xs text-sm text-[#e4c9b1]">Tercatat di buku kas digital Bank Sampah • Penambahan terakhir:
             {{ $student['last_change_desc'] ?? '+Rp 7.500 (07 Sep 2026)' }}</p>
         <div class="absolute right-8 top-8 hidden rounded-xl bg-[#431806] px-5 py-3 text-sm lg:block"><small
@@ -20,8 +20,8 @@
             label="Pendapatan Akumulasi" value="Rp {{ $student['balance'] ?? '42.500' }}" description="{{ $stats['totalIncomeDesc'] ?? 'bebas potongan admin' }}" icon="bi-wallet2" desc-icon="bi-wallet2" accent="#ffb980" /></section>
     <section class="ns-card mt-8 overflow-hidden">
         <div class="flex items-center justify-between p-6">
-            <h2 class="text-2xl font-bold">▌ Setoran Terbaru</h2><a href="{{ route('nasabah.riwayat') }}"
-                class="text-sm font-bold text-[#92591f]">Lihat Semua Riwayat →</a>
+            <h2 class="text-2xl font-bold"><i class="bi bi-receipt"></i> Setoran Terbaru</h2><a href="{{ route('nasabah.riwayat') }}"
+                class="text-sm font-bold text-[#92591f]">Lihat Semua Riwayat <i class="bi bi-arrow-right"></i></a>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full min-w-[800px] text-sm">

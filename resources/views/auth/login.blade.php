@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Masuk — Bank Sampah Sekolah</title>@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="min-h-screen bg-[#faf6ea]">
     <header class="flex h-[74px] items-center border-b border-[#e4dcc7] bg-white px-8"><span
-            class="grid size-10 place-items-center rounded-xl bg-[#54220f] text-white">♧</span><span
+            class="grid size-10 place-items-center rounded-xl bg-[#54220f] text-white"><i class="bi bi-recycle"></i></span><span
             class="ml-3"><strong class="block text-lg leading-5">Bank Sampah Sekolah</strong><small
                 class="text-[#92591f]">SMKN 2 Cimahi • Unit Mandiri</small></span></header>
     <main class="px-4 py-8 lg:px-8">
@@ -24,10 +25,10 @@
                     terpadu untuk menanamkan literasi sirkular ekonomi dan tabungan masa depan warga SMKN 2 Cimahi
                     </p>
                 <div class="relative mt-16 space-y-4">
-                    <div class="rounded-2xl border border-white/15 bg-[#6b351a] p-4"><b class="block text-sm">◉ &nbsp;
+                    <div class="rounded-2xl border border-white/15 bg-[#6b351a] p-4"><b class="block text-sm"><i class="bi bi-check-circle-fill"></i> &nbsp;
                             Penimbangan Terverifikasi ISO</b><small class="ml-6 block text-[#d9b9a0]">Timbangan digital
                             langsung terhubung ke mutasi buku tabungan.</small></div>
-                    <div class="rounded-2xl border border-white/15 bg-[#6b351a] p-4"><b class="block text-sm">◉ &nbsp;
+                    <div class="rounded-2xl border border-white/15 bg-[#6b351a] p-4"><b class="block text-sm"><i class="bi bi-check-circle-fill"></i> &nbsp;
                             Kompensasi Transparan Real-Time</b><small class="ml-6 block text-[#d9b9a0]">Total Rp
                             dihitung otomatis (Berat × Tarif acuan resmi per kg).</small></div>
                 </div>
@@ -48,7 +49,7 @@
 
                     <div
                         class="mt-6 rounded-xl border border-[#e1d8c2] bg-[#f8f4e8] p-4 text-xs font-semibold leading-4">
-                        ◉ &nbsp; Akses Operasional: Digunakan oleh petugas piket, koordinator bank sampah, dan
+                        <i class="bi bi-info-circle"></i> &nbsp; Akses Operasional: Digunakan oleh petugas piket, koordinator bank sampah, dan
                         administrator sekolah, maupun nasabah (login pakai No. Nasabah).</div>
 
                     <label class="ns-label mt-7 block">Username / No. Nasabah</label>
@@ -58,15 +59,15 @@
                     <div class="relative mt-2"><input id="password" class="ns-input pr-12" type="password"
                             name="password" autocomplete="current-password" required><button
                             data-password-toggle type="button"
-                            class="absolute inset-y-0 right-3 text-[#92591f]">◉</button></div>
+                            class="absolute inset-y-0 right-3 text-[#92591f]"><i class="bi bi-eye"></i></button></div>
 
                     <button type="submit"
                         class="mt-4 block w-full rounded-xl bg-[#a66a35] py-3 text-center text-sm font-bold text-white shadow-md">
-                        Masuk ke Sistem &nbsp; →
+                        Masuk ke Sistem &nbsp; <i class="bi bi-arrow-right"></i>
                     </button>
 
                     <hr class="my-6 border-[#eee7d8]">
-                    <div class="rounded-xl border border-[#e5ddca] bg-[#faf7ed] p-4 text-xs leading-5"><b>● &nbsp; Belum
+                    <div class="rounded-xl border border-[#e5ddca] bg-[#faf7ed] p-4 text-xs leading-5"><b><i class="bi bi-person-plus"></i> &nbsp; Belum
                             memiliki akun nasabah?</b><br><span class="ml-5">Buku tabungan dan akses akun digital
                             diterbitkan di ruang operator Bank Sampah oleh pengurus sekolah.</span></div>
                 </form>

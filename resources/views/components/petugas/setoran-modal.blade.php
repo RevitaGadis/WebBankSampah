@@ -6,7 +6,7 @@
                 <h2 class="text-xl font-bold">Input Setoran Sampah</h2>
                 <p class="text-sm text-[#695b51]">Catat penimbangan dan kalkulasi setoran sampah nasabah ke buku tabungan</p>
             </div>
-            <button type="button" aria-label="Tutup" data-setoran-close class="text-2xl">&times;</button>
+            <button type="button" aria-label="Tutup" data-setoran-close class="text-2xl"><i class="bi bi-x-lg"></i></button>
         </header>
 
         <form method="POST" action="{{ route('petugas.setoran.store') }}" class="p-6" id="form-setoran">
