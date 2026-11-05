@@ -59,6 +59,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:web', 'role:admin'])->
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/nasabah', [AdminController::class, 'nasabah'])->name('nasabah');
     Route::get('/nasabah/rekap/{nasabah:no_nasabah}', [AdminController::class, 'rekapNasabah'])->name('nasabah.rekap');
+    Route::get('/nasabah/{nasabah}/ringkas', [AdminController::class, 'ringkasNasabah'])->name('nasabah.ringkas');
     Route::get('/jenis-sampah', [AdminController::class, 'jenisSampah'])->name('jenis-sampah');
     Route::get('/akun', [AdminController::class, 'akun'])->name('akun');
     Route::get('/riwayat', [AdminController::class, 'riwayat'])->name('riwayat');

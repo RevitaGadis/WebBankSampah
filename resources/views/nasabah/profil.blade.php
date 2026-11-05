@@ -7,7 +7,7 @@
                 class="-mt-12 mx-auto grid size-24 place-items-center rounded-full border-4 border-white bg-[#d2ae83] text-3xl font-bold text-white">BS</span>
             <h2 class="mt-4 text-2xl font-bold">{{ $student['name'] }}</h2>
             <p class="font-mono text-sm">ID: {{ $student['number'] }}</p><b
-                class="mt-4 inline-block rounded-full bg-[#dce9c9] px-3 py-1 text-xs">● Nasabah (Siswa Aktif)</b>
+                class="mt-4 inline-block rounded-full bg-[#dce9c9] px-3 py-1 text-xs"><i class="bi bi-people"></i> Nasabah (Siswa Aktif)</b>
             <div class="m-7 grid grid-cols-1 gap-3 text-left"><div class="rounded-xl bg-[#fcf3dd] p-4"><small class="ns-label">Buku
                         Tabungan</small><b class="block text-xl">Rp {{ $student['balance'] ?? '42.500' }}</b><small>Terkunci di Kas</small></div><div class="rounded-xl bg-[#fcf3dd] p-4"><small class="ns-label">Total Penyetoran</small><b
                         class="block text-xl">{{ $student['total_weight'] ?? '18.4 Kg' }}</b><small>Daur Ulang Tertimbang</small></div></div>
@@ -31,8 +31,8 @@
                 <div class="clear-both"></div>
             </article>
             <article class="ns-card p-6">
-                <h2 class="text-xl font-bold">◴ Aktivitas Terakhir</h2>
-                <div class="mt-4 rounded-xl bg-[#fcf8ee] p-4"><b>♻ &nbsp; {{ $student['last_activity_desc'] ?? 'Penyetoran 2.5 Kg Plastik PET' }}</b>
+                <h2 class="text-xl font-bold"><i class="bi bi-clock-history"></i> Aktivitas Terakhir</h2>
+                <div class="mt-4 rounded-xl bg-[#fcf8ee] p-4"><b><i class="bi bi-recycle"></i> &nbsp; {{ $student['last_activity_desc'] ?? 'Penyetoran 2.5 Kg Plastik PET' }}</b>
                     <p class="ml-6 mt-1 text-sm text-[#695b51]">{{ $student['last_activity_time'] ?? 'Konfirmasi Loket A • Kemarin, 13:40 WIB' }}</p>
                 </div>
             </article>

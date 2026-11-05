@@ -3,10 +3,10 @@
     <section class="mx-auto my-5 w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
         <header class="flex items-center justify-between border-b p-6">
             <div>
-                <h2 class="text-xl font-bold"><i class="bi bi-postcard-heart mr-2"></i>Input Setoran Sampah</h2>
+                <h2 class="text-xl font-bold">Input Setoran Sampah</h2>
                 <p class="text-sm text-[#695b51]">Catat penimbangan dan kalkulasi setoran sampah nasabah ke buku tabungan</p>
             </div>
-            <button type="button" data-setoran-close class="text-2xl"><i class="bi bi-x-lg"></i></button>
+            <button type="button" aria-label="Tutup" data-setoran-close class="text-2xl"><i class="bi bi-x-lg"></i></button>
         </header>
 
         <form method="POST" action="{{ route('petugas.setoran.store') }}" class="p-6" id="form-setoran">
@@ -67,7 +67,7 @@
             <footer class="mt-6 flex justify-end gap-3">
                 <button type="button" data-setoran-close class="rounded-lg border px-5 py-3 text-sm font-bold">Batal</button>
                 <button type="submit" class="rounded-lg bg-[#54220f] px-5 py-3 text-sm font-bold text-white">
-                    <i class="bi bi-save mr-2"></i>Simpan Setoran
+                    Simpan Setoran
                 </button>
             </footer>
         </form>

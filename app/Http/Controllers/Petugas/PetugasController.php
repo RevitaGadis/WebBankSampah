@@ -61,7 +61,6 @@ class PetugasController extends Controller
 
         $transactions = Setoran::with(['nasabah', 'jenisSampah', 'petugas'])
             ->latest('tanggal')
-            ->limit(10)
             ->get()
             ->map(fn ($s) => TransactionFormatter::forPetugas($s))
             ->all();
@@ -87,7 +86,6 @@ class PetugasController extends Controller
 
         $transactions = Setoran::with(['nasabah', 'jenisSampah', 'petugas'])
             ->latest('tanggal')
-            ->limit(10)
             ->get()
             ->map(fn ($s) => TransactionFormatter::forPetugas($s))
             ->all();

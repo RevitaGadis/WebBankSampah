@@ -92,7 +92,7 @@ class AdminController extends Controller
         ];
 
         $transactions = Setoran::with(['nasabah', 'jenisSampah', 'petugas'])
-            ->latest('tanggal')->limit(10)->get()
+            ->latest('tanggal')->get()
             ->map(fn ($s) => TransactionFormatter::forPetugas($s))->all();
 
         return view('admin.dashboard', [
@@ -135,6 +135,19 @@ class AdminController extends Controller
             'student' => $this->studentArray($nasabah, true),
             'transactions' => $transactions,
             'stats' => $stats,
+        ]);
+    }
+
+    public function ringkasNasabah(Nasabah $nasabah): View
+    {
+        return view('admin.partials.nasabah-detail', [
+            'student' => $this->studentArray($nasabah, true),
+            'transactions' => $nasabah->setoran()->with('jenisSampah')
+                ->latest('tanggal')
+                ->limit(3)
+                ->get()
+                ->map(fn ($s) => TransactionFormatter::forPetugas($s))
+                ->all(),
         ]);
     }
 

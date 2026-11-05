@@ -5,7 +5,7 @@
                 <h2 class="text-xl font-bold">Detail Transaksi Setoran <span
                         class="ml-2 rounded-full bg-[#dce9c9] px-2 py-1 text-xs">Sukses / Terverifikasi</span></h2>
                 <p class="text-sm text-[#695b51]">Rincian bukti penerimaan sampah dan kredit saldo nasabah</p>
-            </div><button data-petugas-detail-close class="text-2xl">×</button>
+            </div><button data-petugas-detail-close class="text-2xl"><i class="bi bi-x-lg"></i></button>
         </header>
         <div class="p-6">
             <div class="grid grid-cols-2 gap-3 rounded-xl bg-[#fcf7e9] p-4 text-sm md:grid-cols-4"><span>ID SETORAN<b
@@ -25,7 +25,6 @@
                 </div>
             </div>
         </div>
-        <footer class="flex justify-end border-t bg-[#fcf7e9] p-5"><button onclick="window.print()"
-                class="rounded-lg bg-[#92591f] px-5 py-2 text-sm font-bold text-white">⇩ Unduh PDF</button></footer>
+        <footer class="flex justify-end border-t bg-[#fcf7e9] p-5"><button onclick="window.print()" class="rounded-lg bg-[#92591f] px-5 py-2 text-sm font-bold text-white">Unduh PDF</button></footer>
     </section>
 </div>

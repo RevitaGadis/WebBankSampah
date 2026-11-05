@@ -5,47 +5,146 @@
             <p class="mt-1 max-w-2xl text-[#695b51]">Daftar seluruh setoran sampah yang telah kamu lakukan dan
                 divalidasi oleh petugas sekolah.</p>
         </div>
-        <div class="rounded-xl bg-[#f3eddd] px-5 py-3 text-sm"><small class="block">▱ Buku Besar Siswa</small><b>{{ $student['count'] }}
+        <div class="rounded-xl bg-[#f3eddd] px-5 py-3 text-sm"><small class="block"><i class="bi bi-journal-text"></i>
+                Buku Besar Siswa</small><b>{{ $student['count'] }}
                 Transaksi Valid</b></div>
     </div>
-    <section class="mt-8 grid gap-4 md:grid-cols-3"><x-nasabah.stat-card label="Akumulasi Bulan Ini" value="{{ $stats['monthlyWeight'] }}"
-            description="{{ $stats['monthlyWeightDesc']}}" symbol="♧" /><x-nasabah.stat-card
-            label="Konversi Nilai Tabungan" value="{{ $stats['monthlyIncome'] }}" description="{{ $stats['monthlyIncomeDesc'] }}"
-            symbol="▣" />
+
+    <section class="mt-8 grid gap-4 md:grid-cols-3"><x-nasabah.stat-card label="Akumulasi Bulan Ini"
+            value="{{ $stats['monthlyWeight'] }}" description="{{ $stats['monthlyWeightDesc'] }}" icon="bi-recycle"
+            accent="#92591f" /><x-nasabah.stat-card label="Konversi Nilai Tabungan"
+            value="{{ $stats['monthlyIncome'] }}" description="{{ $stats['monthlyIncomeDesc'] }}" icon="bi-wallet2"
+            desc-icon="bi-wallet2" accent="#bdcaa8" />
         <article class="rounded-2xl bg-[#5a270f] p-6 text-white"><span class="ns-label !text-[#dfc5af]">STATUS
-                REKENING</span><strong class="mt-4 block text-2xl">{{ $student['number'] }} / {{ $student['class']}}</strong>
+                REKENING</span><strong class="mt-4 block text-2xl">{{ $student['number'] }} /
+                {{ $student['class'] }}</strong>
             <p class="mt-2 text-sm text-[#e4c9b1]">Setoran terakhir tercatat pada {{ $student['last_deposit'] }}</p><b
-                class="mt-5 block text-xs">Petugas Shift Aktif <span class="float-right">{{ $stats['activeOfficers'] }}</span></b>
+                class="mt-5 block text-xs">Petugas Shift Aktif <span
+                    class="float-right">{{ $stats['activeOfficers'] }}</span></b>
         </article>
     </section>
-    <section class="ns-card mt-8 grid gap-3 p-4 md:grid-cols-[1fr_1.1fr_.65fr]"><input class="ns-input"
-            placeholder="⌕  Cari nomor transaksi atau komoditas…"></section>
+
+    {{-- Pencarian --}}
+    <section class="ns-card mt-8 overflow-hidden">
+        <div class="p-5">
+            <label class="relative block w-full max-w-md">
+                <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-[#7d6c60]"></i>
+                <input type="search" id="nasabah-riwayat-search" autocomplete="off"
+                    placeholder="Cari transaksi, tanggal, jenis sampah, atau petugas..."
+                    class="w-full rounded-lg bg-[#f8f1df] py-2.5 pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-[#92591f]">
+            </label>
+        </div>
+    </section>
+
+    {{-- Tabel --}}
     <section class="ns-card mt-6 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full min-w-[1050px] text-sm">
-                <thead class="bg-[#f8f1df] text-left text-[10px] uppercase tracking-wide">
+                <thead class="bg-[#f8f1df] text-left text-[10px] uppercase tracking-wide text-[#695b51]">
                     <tr>
                         <th class="px-5 py-5">No. Transaksi</th>
                         <th>Tanggal & Waktu</th>
                         <th>Jenis Sampah</th>
-                        <th>Berat</th>
-                        <th>Harga / Kg</th>
-                        <th>Total Nilai</th>
+                        <th class="text-right">Berat<small
+                                class="mt-0.5 block text-[9px] font-medium normal-case tracking-normal">(kg)</small>
+                        </th>
+                        <th class="text-right">Harga / Kg<small
+                                class="mt-0.5 block text-[9px] font-medium normal-case tracking-normal">(Rp)</small>
+                        </th>
+                        <th class="text-right">Total Nilai<small
+                                class="mt-0.5 block text-[9px] font-medium normal-case tracking-normal">(Rp)</small>
+                        </th>
                         <th>Petugas Validasi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody>@foreach($transactions as $transaction)<x-nasabah.transaction-row
-                :transaction="$transaction" />@endforeach</tbody>
+                <tbody data-nasabah-riwayat-rows>
+                    @forelse ($transactions as $transaction)
+                        <x-nasabah.transaction-row :transaction="$transaction" />
+                    @empty
+                        <tr data-page-ignore>
+                            <td colspan="8" class="px-5 py-10 text-center text-sm text-[#695b51]">Belum ada setoran
+                                tercatat.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
             </table>
         </div>
-        <footer
-            class="flex flex-wrap items-center justify-between gap-3 border-t border-[#eee8dc] p-5 text-xs text-[#695b51]">
-            <span>Menampilkan 1 - {{ count($transactions) }} dari {{ $student['count'] ?? '12' }} setoran | Halaman 1 dari {{ $stats['totalPages'] ?? '2' }}</span><span class="space-x-2"><button disabled
-                    class="rounded bg-[#f4f0e6] px-3 py-2">‹ Sebelumnya</button><button
-                    class="rounded bg-[#955a25] px-3 py-2 text-white">1</button><button
-                    class="rounded bg-[#f4f0e6] px-3 py-2">2</button><button
-                    class="rounded bg-[#f4f0e6] px-3 py-2">Berikutnya ›</button></span></footer>
+
+        <p data-nasabah-riwayat-empty class="hidden p-6 text-center text-sm text-[#695b51]">Tidak ada setoran yang
+            sesuai dengan pencarian.</p>
+
+        {{-- Pagination --}}
+        <div
+            class="flex flex-wrap items-center justify-between gap-3 border-t border-[#eadfc9] px-5 py-4 text-sm text-[#695b51]">
+            <span data-nasabah-riwayat-info></span>
+            <div class="flex gap-2">
+                <button type="button" data-nasabah-riwayat-prev
+                    class="rounded-lg border border-[#d8cfc0] px-4 py-2 disabled:opacity-40">Sebelumnya</button>
+                <button type="button" data-nasabah-riwayat-next
+                    class="rounded-lg border border-[#d8cfc0] px-4 py-2 disabled:opacity-40">Berikutnya</button>
+            </div>
+        </div>
     </section>
+
     <x-nasabah.receipt-modal />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const PER_PAGE = 10;
+            const input = document.getElementById('nasabah-riwayat-search');
+            const tbody = document.querySelector('[data-nasabah-riwayat-rows]');
+            const emptyMsg = document.querySelector('[data-nasabah-riwayat-empty]');
+            const info = document.querySelector('[data-nasabah-riwayat-info]');
+            const prev = document.querySelector('[data-nasabah-riwayat-prev]');
+            const next = document.querySelector('[data-nasabah-riwayat-next]');
+            if (!input || !tbody) return;
+
+            const rows = [...tbody.querySelectorAll('tr:not([data-page-ignore])')];
+            const normalize = s => s.toLowerCase().replace(/\s+/g, ' ').trim();
+            const index = rows.map(r => normalize(r.textContent));
+
+            let filtered = rows.slice();
+            let page = 1;
+
+            function render() {
+                const pages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+                page = Math.min(Math.max(page, 1), pages);
+                const start = (page - 1) * PER_PAGE;
+                const visible = new Set(filtered.slice(start, start + PER_PAGE));
+
+                rows.forEach(r => {
+                    r.style.display = visible.has(r) ? '' : 'none';
+                });
+
+                const searching = input.value.trim() !== '';
+                emptyMsg?.classList.toggle('hidden', !(searching && filtered.length === 0));
+
+                if (info) {
+                    info.textContent = filtered.length ?
+                        `Menampilkan ${start + 1}–${Math.min(start + PER_PAGE, filtered.length)} dari ${filtered.length} setoran` :
+                        'Tidak ada setoran';
+                }
+                if (prev) prev.disabled = page <= 1;
+                if (next) next.disabled = page >= pages;
+            }
+
+            input.addEventListener('input', () => {
+                const q = normalize(input.value);
+                filtered = q ? rows.filter((_, i) => index[i].includes(q)) : rows.slice();
+                page = 1;
+                render();
+            });
+            prev?.addEventListener('click', () => {
+                page--;
+                render();
+            });
+            next?.addEventListener('click', () => {
+                page++;
+                render();
+            });
+
+            render();
+        });
+    </script>
 </x-layouts.nasabah>

@@ -2,10 +2,10 @@
     <section class="relative mx-auto my-4 max-w-3xl rounded-2xl bg-white p-5 shadow-2xl sm:p-8" role="dialog"
         aria-modal="true" aria-labelledby="receipt-title">
         <button type="button" data-receipt-close
-            class="absolute right-4 top-4 grid size-9 place-items-center rounded-full bg-[#f3eddd] text-lg">×</button>
+            class="absolute right-4 top-4 grid size-9 place-items-center rounded-full bg-[#f3eddd] text-lg"><i class="bi bi-x-lg"></i></button>
         <header class="flex flex-wrap items-center justify-between gap-4 rounded-xl bg-[#fcf3dd] p-5">
             <div class="flex items-center gap-3"><span
-                    class="grid size-14 place-items-center rounded-xl bg-[#54220f] text-2xl text-white">♧</span><span>
+                    class="grid size-14 place-items-center rounded-xl bg-[#54220f] text-2xl text-white"><i class="bi bi-recycle"></i></span><span>
                     <h2 id="receipt-title" class="text-xl font-bold">Bank Sampah Sekolah</h2>
                     <p class="text-sm font-semibold text-[#695b51]">SMKN 2 Cimahi</p><b
                         class="text-xs uppercase text-[#92591f]">Bukti penerimaan setoran sampah daur ulang</b>
@@ -27,7 +27,7 @@
             <div class="mt-3 overflow-hidden rounded-xl bg-[#f8f1df]">
                 <div class="grid grid-cols-3 bg-[#e9e0c9] p-3 text-center text-[10px] font-bold uppercase">
                     <span>Parameter / Item</span><span>Spesifikasi & Satuan</span><span>Subtotal / Hasil</span></div>
-                <div class="grid grid-cols-3 gap-y-5 p-5 text-sm"><b>● Kategori Sampah</b><b data-receipt-jenis
+                <div class="grid grid-cols-3 gap-y-5 p-5 text-sm"><b><i class="bi bi-recycle"></i> Kategori Sampah</b><b data-receipt-jenis
                         class="text-[#92591f]"></b><span data-receipt-detail></span><b>Berat Bersih (Netto)</b><strong
                         class="text-xl"><span data-receipt-weight></span> Kg</strong><span>Timbangan Digital Loket
                         A</span><b>Tarif Resmi Sekolah</b><span>Rp <span data-receipt-price></span> /
@@ -48,7 +48,7 @@
         <section class="mt-6 rounded-xl bg-[#f8f6f1] p-5"><span class="ns-label">PETUGAS VERIFIKATOR</span><strong
                 data-receipt-officer class="block"></strong><small>Piket Timbangan Loket A</small></section><button
             type="button" onclick="window.print()"
-            class="mt-8 rounded-xl bg-[#955a25] px-5 py-3 text-sm font-bold text-white">▣ Cetak Salinan Struk
+            class="mt-8 rounded-xl bg-[#955a25] px-5 py-3 text-sm font-bold text-white"><i class="bi bi-printer"></i> Cetak Salinan Struk
             (PDF)</button>
     </section>
 </div>

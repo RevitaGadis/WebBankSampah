@@ -2,28 +2,30 @@
     <div class="flex flex-wrap justify-between gap-4"><div><h1 class="text-4xl font-bold">Kelola Akun &amp; Hak Akses Pengguna</h1><p class="mt-1 text-[#695b51]">Manajemen akun petugas piket timbang dan administrator sistem.</p></div><button type="button" data-admin-account-open="add" class="rounded-lg bg-[#92591f] px-5 py-3 text-sm font-bold text-white">+ Tambah Akun Baru</button></div>
 
     <section class="mt-6 grid gap-4 md:grid-cols-4">
-        <x-nasabah.stat-card label="Total Akun Terdaftar" value="{{ $stats['totalAccounts'] ?? '0' }}"/>
-        <x-nasabah.stat-card label="Nasabah Siswa" value="{{ $stats['totalStudentAccounts'] ?? '0' }}"/>
-        <x-nasabah.stat-card label="Guru & Tendik" value="{{ $stats['totalTeacherAccounts'] ?? '0' }}"/>
-        <x-nasabah.stat-card label="Petugas & Admin" value="{{ $stats['totalStaffAccounts'] ?? '0' }}"/>
+        <x-nasabah.stat-card label="Total Akun Terdaftar" value="{{ $stats['totalAccounts'] ?? '0' }}" icon="bi-people" accent="#92591f" />
+        <x-nasabah.stat-card label="Nasabah Siswa" value="{{ $stats['totalStudentAccounts'] ?? '0' }}" icon="bi-people" accent="#bdcaa8" />
+        <x-nasabah.stat-card label="Guru & Tendik" value="{{ $stats['totalTeacherAccounts'] ?? '0' }}" icon="bi-person-badge" accent="#ffb980" />
+        <x-nasabah.stat-card label="Petugas & Admin" value="{{ $stats['totalStaffAccounts'] ?? '0' }}" icon="bi-person-gear" accent="#dce9c9" />
     </section>
 
     <section class="ns-card mt-8 overflow-hidden">
         <div class="p-5"><x-admin.table-search placeholder="Cari nama, username, role..." target="[data-admin-account-rows] tr" empty="[data-admin-account-empty]" /></div>
         <div class="overflow-x-auto">
             <table class="w-full min-w-[800px] text-sm">
-                <thead class="bg-[#f8f1df] text-left text-[10px] uppercase"><tr><th class="p-4">No</th><th>Nama</th><th>Username</th><th>Peran</th><th>Status</th><th>Aksi</th></tr></thead>
+                <thead class="bg-[#f8f1df] text-left text-[10px] uppercase tracking-wide text-[#695b51]"><tr><th class="w-[6%] px-4 py-4 text-center">No</th><th class="w-[28%] px-4 py-4">Nama</th><th class="w-[22%] px-4 py-4">Username</th><th class="w-[16%] px-4 py-4">Peran</th><th class="w-[16%] px-4 py-4">Status</th><th class="w-[12%] px-4 py-4 text-center">Aksi</th></tr></thead>
                 <tbody data-admin-account-rows>
                     @foreach($accounts as $i => $a)
-                        <tr data-search="{{ strtolower($a['name'].' '.$a['username'].' '.$a['role']) }}" class="border-b border-[#f0eadf]">
-                            <td class="p-4">{{ $i + 1 }}</td>
-                            <td><b>{{ $a['name'] }}</b></td>
-                            <td class="font-mono text-xs">{{ $a['username'] }}</td>
-                            <td><span class="rounded bg-[#eee8d7] px-2 py-1 text-xs">{{ $a['role'] }}</span></td>
-                            <td><span class="rounded-full bg-[#dce9c9] px-2 py-1 text-xs">&bull; {{ $a['status'] }}</span></td>
-                            <td class="space-x-2 whitespace-nowrap">
+                        <tr data-search="{{ strtolower($a['name'].' '.$a['username'].' '.$a['role']) }}" class="border-b border-[#f0eadf] even:bg-[#fffdf8]">
+                            <td class="px-4 py-4 text-center font-mono text-xs text-[#695b51]">{{ $i + 1 }}</td>
+                            <td class="px-4 py-4"><b>{{ $a['name'] }}</b></td>
+                            <td class="px-4 py-4 font-mono text-xs">{{ $a['username'] }}</td>
+                            <td class="px-4 py-4"><span class="rounded bg-[#eee8d7] px-2 py-1 text-xs">{{ $a['role'] }}</span></td>
+                            <td class="px-4 py-4"><span class="rounded-full bg-[#dce9c9] px-2 py-1 text-xs">&bull; {{ $a['status'] }}</span></td>
+                            <td class="px-4 py-4">
+                                <div class="flex items-center justify-center gap-1">
                                 <button type="button" title="Edit akun" data-admin-account-open="edit" data-id="{{ $a['id'] }}" data-name="{{ $a['name'] }}" data-username="{{ $a['username'] }}" data-role="{{ $a['role'] }}" data-role-value="{{ $a['role_value'] }}" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-[#92591f] hover:bg-[#f4ecd7]"><i class="bi bi-pencil"></i></button>
                                 <button type="button" title="Hapus akun" data-admin-account-open="delete" data-id="{{ $a['id'] }}" data-name="{{ $a['name'] }}" class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-red-600 hover:bg-red-50"><i class="bi bi-trash"></i></button>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -31,6 +33,7 @@
             </table>
         </div>
         <p data-admin-account-empty class="hidden p-6 text-center text-sm text-[#695b51]">Tidak ada akun yang sesuai dengan pencarian.</p>
+        <x-admin.table-pagination rows="[data-admin-account-rows] tr" label="akun" />
     </section>
 
     {{-- Modal: Tambah Akun --}}
@@ -38,7 +41,7 @@
         <section role="dialog" aria-modal="true" class="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
             <header class="flex items-start justify-between bg-[#fcf3dd] px-6 py-5">
                 <div><h2 class="text-xl font-bold">Tambah Akun Pengguna Baru</h2><p class="text-sm text-[#695b51]">Daftarkan akun petugas piket atau administrator</p></div>
-                <button type="button" data-admin-account-close class="text-2xl text-[#695b51]">&times;</button>
+                <button type="button" data-admin-account-close class="text-2xl text-[#695b51]"><i class="bi bi-x-lg"></i></button>
             </header>
             <form method="POST" action="{{ route('admin.akun.store') }}" class="p-6">
                 @csrf
@@ -66,7 +69,7 @@
         <section role="dialog" aria-modal="true" class="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
             <header class="flex items-start justify-between bg-[#54220f] px-6 py-5 text-white">
                 <div><h2 class="text-xl font-bold">Edit Akun</h2><p class="text-sm text-white/70">Perbarui data akun pengguna</p></div>
-                <button type="button" data-admin-account-close class="text-2xl text-white/70">&times;</button>
+                <button type="button" data-admin-account-close class="text-2xl text-white/70"><i class="bi bi-x-lg"></i></button>
             </header>
             <form method="POST" action="" id="form-edit-akun" data-action-template="{{ route('admin.akun.update', '__ID__') }}" class="p-6">
                 @csrf

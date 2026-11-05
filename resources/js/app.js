@@ -1,4 +1,5 @@
 import './bootstrap';
+import { initPagination } from './pagination';
 
 document.addEventListener('DOMContentLoaded', () => {
     const toggle = (element, from, to) => element?.classList.replace(from, to);
@@ -72,6 +73,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminNasabahModals = [...document.querySelectorAll('[data-admin-nasabah-modal]')];
     let activeAdminNasabah = {};
     const closeAdminNasabahModals = () => adminNasabahModals.forEach((modal) => toggle(modal, 'flex', 'hidden'));
+    let adminNasabahDetailRequest = 0;
+    const loadAdminNasabahDetail = async (id) => {
+        const target = document.querySelector('[data-admin-nasabah-modal="detail"] [data-an-ringkas]');
+        if (!target || !id) return;
+        const requestId = ++adminNasabahDetailRequest;
+        target.innerHTML = '<p class="py-10 text-center text-sm text-[#695b51]">Memuat rincian nasabah&hellip;</p>';
+        try {
+            const response = await fetch(`/admin/nasabah/${id}/ringkas`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const html = await response.text();
+            if (requestId !== adminNasabahDetailRequest) return;
+            target.innerHTML = html;
+        } catch (error) {
+            if (requestId !== adminNasabahDetailRequest) return;
+            target.innerHTML = '<p class="py-10 text-center text-sm text-[#92591f]">Rincian gagal dimuat. Silakan coba lagi.</p>';
+        }
+    };
     document.querySelectorAll('[data-admin-nasabah-open]').forEach((button) => button.addEventListener('click', () => {
         const modal = document.querySelector(`[data-admin-nasabah-modal="${button.dataset.adminNasabahOpen}"]`);
         const rowData = Object.fromEntries(Object.entries(button.dataset).filter(([key]) => !['adminNasabahOpen'].includes(key)));
@@ -88,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const num = values.number || '';
             rekapLink.href = num ? `/admin/nasabah/rekap/${num}` : '#';
         }
+        if (button.dataset.adminNasabahOpen === 'detail') loadAdminNasabahDetail(values.id);
         if (modal) {
             closeAdminNasabahModals();
             toggle(modal, 'hidden', 'flex');
@@ -100,6 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && adminNasabahModals.some((modal) => modal.classList.contains('flex'))) closeAdminNasabahModals();
     });
+
+    // Pagination client-side: satu komponen untuk semua tabel.
+    const refreshPagination = initPagination();
 
     const adminNasabahSearch = document.querySelector('[data-admin-nasabah-search]');
     const adminNasabahClass = document.querySelector('[data-admin-nasabah-class]');
@@ -115,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (visible) count += 1;
         });
         adminNasabahEmpty?.classList.toggle('hidden', count !== 0);
+        refreshPagination();
     };
     adminNasabahSearch?.addEventListener('input', filterAdminNasabah);
     adminNasabahClass?.addEventListener('change', filterAdminNasabah);
@@ -173,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (visible) count += 1;
         });
         adminWasteEmpty?.classList.toggle('hidden', count !== 0);
+        refreshPagination();
     });
 
     const adminAccountModals = [...document.querySelectorAll('[data-admin-account-modal]')];
@@ -246,15 +270,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const query = input.value.toLowerCase().trim();
             let count = 0;
             rows.forEach((row) => {
-                const visible = row.textContent.toLowerCase().includes(query);
+                const searchable = (row.dataset.search || row.textContent).toLowerCase();
+                const visible = searchable.includes(query);
                 row.classList.toggle('hidden', !visible);
                 if (visible) count += 1;
             });
             empty?.classList.toggle('hidden', count !== 0);
+            refreshPagination();
         });
     };
     bindTextSearch('[data-admin-account-search]', '[data-admin-account-rows] tr', '[data-admin-account-empty]');
     bindTextSearch('[data-admin-history-search]', '.ns-card table tbody tr', '[data-admin-history-empty]');
+    bindTextSearch('#nasabah-riwayat-search', '[data-nasabah-riwayat-rows] tr:not([data-page-ignore])', '[data-nasabah-riwayat-empty]');
 
     document.querySelectorAll('[data-admin-global-search]').forEach((input) => {
         const rows = [...document.querySelectorAll(input.dataset.searchTarget)];
@@ -269,8 +296,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (visible) count += 1;
             });
             empty?.classList.toggle('hidden', count !== 0);
+            refreshPagination();
         });
     });
+
 
     document.querySelectorAll('[data-flash]').forEach((el) => setTimeout(() => el.remove(), 4000));
 });

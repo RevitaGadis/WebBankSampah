@@ -25,7 +25,6 @@ class PortalController extends Controller
         $transactions = $nasabah->setoran()
             ->with('jenisSampah', 'petugas')
             ->latest('tanggal')
-            ->limit(5)
             ->get()
             ->map(fn ($s) => TransactionFormatter::forNasabah($s))
             ->all();
