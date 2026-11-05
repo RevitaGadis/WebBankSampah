@@ -30,4 +30,23 @@ class JenisSampah extends Model
     {
         return $this->hasMany(Setoran::class, 'id_jenis', 'id_jenis');
     }
+
+    public static function ringkasan(): array
+    {
+        return self::orderBy('nama_jenis')->get()->map(function ($jenis, $i) {
+            $kgBulanIni = Setoran::where('id_jenis', $jenis->id_jenis)
+                ->whereMonth('tanggal', now()->month)
+                ->whereYear('tanggal', now()->year)
+                ->sum('berat');
+
+            return [
+                'id' => $jenis->id_jenis,
+                'code' => 'JS' . str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT),
+                'name' => $jenis->nama_jenis,
+                'price' => number_format((float) $jenis->harga_per_kg, 0, ',', '.'),
+                'unit' => 'Kg',
+                'month' => number_format((float) $kgBulanIni, 1),
+            ];
+        })->all();
+    }
 }

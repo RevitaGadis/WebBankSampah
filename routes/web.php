@@ -7,15 +7,10 @@ use App\Http\Controllers\Portal\PortalController;
 use App\Http\Controllers\JenisSampahController;
 use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\SetoranController;
+use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/login');
-
-/*
-|--------------------------------------------------------------------------
-| Login
-|--------------------------------------------------------------------------
-*/
+Route::get('/', [LandingController::class, 'index'])->name('welcome');
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -27,18 +28,212 @@
         outline-offset: 3px;
     }
 }
+
 @layer components {
     .ns-card { @apply rounded-2xl bg-white shadow-[0_12px_28px_rgba(75,40,13,.08)]; }
     .ns-label { @apply text-[11px] font-bold uppercase tracking-[.08em] text-[#695b51]; }
     .ns-input { @apply w-full rounded-xl border border-[#ddd4bd] bg-[#fffdf7] px-4 py-3 text-sm outline-none transition focus:border-[#9a5d26] focus:ring-2 focus:ring-[#9a5d26]/15; }
     .ns-nav-link { @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-[#eadbc8] transition hover:bg-white/10; }
     .ns-nav-link.active { @apply bg-[#955a25] text-white shadow-sm; }
+
+    /* Landing page */
+    .page-width {
+        width: min(100% - 48px, 1180px);
+        margin-inline: auto;
+    }
+
+    .section-title {
+        margin-top: 7px;
+        font-size: clamp(25px, 3vw, 34px);
+        font-weight: 800;
+        letter-spacing: -.045em;
+        line-height: 1.12;
+    }
+
+    .section-copy {
+        color: #817367;
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: #95652e;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .09em;
+        text-transform: uppercase;
+    }
+
+    .icon-tile {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 12px;
+        background: #f8ead3;
+        color: #95602b;
+        font-size: 17px;
+    }
+
+    .brown-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 10px;
+        background: #542511;
+        padding: 11px 18px;
+        color: white;
+        font-size: 12px;
+        font-weight: 750;
+        transition: background .2s, transform .2s;
+    }
+
+    .brown-button:hover { background: #3b190d; }
+
+    .light-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid #e7dcc7;
+        border-radius: 10px;
+        background: #fffdf7;
+        padding: 11px 18px;
+        color: #594638;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .tarif-filter {
+        border: 1px solid #eee4d2;
+        border-radius: 999px;
+        background: #fffdf7;
+        padding: 8px 14px;
+        color: #6f6255;
+        font-size: 11px;
+        font-weight: 700;
+        transition: .2s;
+    }
+
+    .tarif-filter.active,
+    .tarif-filter:hover {
+        border-color: #542511;
+        background: #542511;
+        color: white;
+    }
+
+    .tarif-card {
+        min-height: 150px;
+        padding: 14px;
+        border: 1px solid rgba(105, 78, 48, .07);
+        border-radius: 15px;
+        background: #fffdf8;
+        box-shadow: 0 4px 14px rgba(75, 48, 24, .035);
+    }
+
+    .tarif-icon {
+        display: grid;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 32px;
+        place-items: center;
+        border-radius: 9px;
+        background: #f8e8d4;
+        color: #95602b;
+        font-size: 13px;
+    }
+
+    .tarif-price {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 12px;
+        border-radius: 9px;
+        background: #f8f1df;
+        padding: 9px 11px;
+    }
+
+    .step-card { min-height: 178px; }
+
+    .step-number {
+        display: grid;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        border-radius: 50%;
+        background: #542511;
+        color: white;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        white-space: nowrap;
+        border-radius: 999px;
+        background: #e8f0dc;
+        padding: 5px 9px;
+        color: #55783e;
+        font-size: 9px;
+        font-weight: 750;
+    }
+
+    .activity-table {
+        width: 100%;
+        min-width: 790px;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 10px;
+    }
+
+    .activity-table thead th {
+        background: #f5eedc;
+        padding: 11px 12px;
+        color: #75695c;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: .045em;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+
+    .activity-table thead th:first-child,
+    .activity-table tbody td:first-child { padding-left: 16px; }
+
+    .activity-table tbody td {
+        border-top: 1px solid #f1ecdf;
+        padding: 10px 12px;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .activity-code {
+        display: inline-block;
+        margin-right: 5px;
+        border-radius: 5px;
+        background: #f6efdf;
+        padding: 3px 6px;
+        color: #80603b;
+        font-size: 8px;
+        font-weight: 800;
+    }
+
+    .activity-money {
+        color: #4b2c1b;
+        font-weight: 800;
+        letter-spacing: .01em;
+    }
 }
 
 /* Baris tabel yang tidak masuk halaman aktif disembunyikan oleh pagination. */
-.ns-page-off {
-    display: none;
-}
+.ns-page-off { display: none; }
 
 /* Aksi struk tetap memiliki tampilan yang sama saat ditekan. */
 .table-action-stable:hover,
@@ -56,9 +251,20 @@
 
 @media (min-width: 640px) {
     [data-admin-waste-modal="add"] form > .mt-5.space-y-3,
-    [data-admin-waste-modal="edit"] form > .mt-5.space-y-3 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+    [data-admin-waste-modal="edit"] form > .mt-5.space-y-3 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .75rem;
+    }
 
     [data-admin-waste-modal="add"] form > .mt-5.space-y-3 > :nth-child(3),
     [data-admin-waste-modal="add"] form > .mt-5.space-y-3 > :last-child,
-    [data-admin-waste-modal="edit"] form > .mt-5.space-y-3 > :last-child { grid-column: span 2; }
+    [data-admin-waste-modal="edit"] form > .mt-5.space-y-3 > :last-child {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 640px) {
+    .page-width { width: min(100% - 32px, 1180px); }
+    .section-title { font-size: 27px; }
 }
