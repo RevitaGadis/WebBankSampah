@@ -9,7 +9,7 @@
 
 <body class="min-h-screen bg-[#faf6ea]">
     <header class="flex h-[74px] items-center border-b border-[#e4dcc7] bg-white px-8"><span
-            class="grid size-10 place-items-center rounded-xl bg-[#54220f] text-white">♧</span><span
+            class="grid size-10 place-items-center rounded-xl bg-[#54220f] text-white">♲</span><span
             class="ml-3"><strong class="block text-lg leading-5">Bank Sampah Sekolah</strong><small
                 class="text-[#92591f]">SMKN 2 Cimahi • Unit Mandiri</small></span></header>
     <main class="px-4 py-8 lg:px-8">

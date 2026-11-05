@@ -1,7 +1,7 @@
 <x-layouts.admin title="Data Nasabah" :admin="$admin">
     <div class="flex flex-wrap justify-between gap-4">
         <div><h1 class="text-4xl font-bold">Data Nasabah Bank Sampah</h1><p class="mt-1 max-w-2xl text-[#695b51]">Kelola data nasabah siswa dan guru aktif, informasi saldo tabungan, dan mutasi setoran sirkular sekolah.</p></div>
-        <div class="flex gap-3"><button type="button" data-admin-nasabah-open="add" class="rounded-lg bg-[#92591f] px-4 py-3 text-sm font-bold text-white">+ Tambah Nasabah Baru</button></div>
+        <div class="flex gap-3"><button type="button" data-admin-nasabah-open="add" class="rounded-lg bg-[#92591f] px-6 py-3 text-sm font-bold text-white">+ Tambah Nasabah Baru</button></div>
     </div>
 
     <section class="mt-8 grid gap-4 md:grid-cols-3"><x-nasabah.stat-card label="Siswa Terdaftar" value="{{ $stats['totalStudents'] ?? '228' }}" description="{{ $stats['totalStudentsDesc'] ?? '93% partisipasi per kelas kejuruan' }}"/><x-nasabah.stat-card label="Pendidik & Tenaga Kerja" value="{{ $stats['totalTeachers'] ?? '17' }}" description="{{ $stats['totalTeachersDesc'] ?? 'Nasabah Teladan' }}"/><x-nasabah.stat-card label="Total Saldo Terkumpul" value="{{ $stats['totalBalance'] ?? 'Rp 4.850.000' }}" description="{{ $stats['totalBalanceDesc'] ?? 'Tercatat di Buku Induk' }}"/></section>

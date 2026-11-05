@@ -6,7 +6,7 @@
                 <h1 class="text-3xl font-bold">Dashboard Pengelola</h1>
                 <p class="text-[#695b51]">Selamat datang kembali, {{ $officer['name'] }} • Panel operasional timbang dan
                     tabungan bank sampah sekolah hari ini.</p>
-            </div><button data-setoran-open class="rounded-lg bg-[#92591f] px-6 py-3 text-sm font-bold text-white">⊕ +
+            </div><button data-setoran-open class="rounded-lg bg-[#92591f] px-6 py-3 text-sm font-bold text-white"> +
                 Catat Setoran Baru</button>
         </div>
     </section>

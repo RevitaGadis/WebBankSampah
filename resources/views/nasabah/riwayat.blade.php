@@ -19,9 +19,7 @@
         </article>
     </section>
     <section class="ns-card mt-8 grid gap-3 p-4 md:grid-cols-[1fr_1.1fr_.65fr]"><input class="ns-input"
-            placeholder="⌕  Cari nomor transaksi atau komoditas…"><button
-            class="rounded-xl bg-[#f7f0df] px-4 text-left text-sm font-semibold">Semua Tanggal (Bulan Ini: {{ $stats['currentDate'] }})　▣</button><button class="rounded-xl bg-[#f7f0df] px-4 text-left text-sm font-semibold">Semua Jenis
-            Sampah　⌄</button></section>
+            placeholder="⌕  Cari nomor transaksi atau komoditas…"></section>
     <section class="ns-card mt-6 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full min-w-[1050px] text-sm">

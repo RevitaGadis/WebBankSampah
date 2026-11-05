@@ -5,7 +5,7 @@
             <div>
                 <h1 class="text-3xl font-bold">Setoran</h1>
                 <p class="text-[#695b51]">Panel operasional timbang dan tabungan bank sampah sekolah hari ini.</p>
-            </div><button data-setoran-open class="rounded-lg bg-[#92591f] px-6 py-3 text-sm font-bold text-white">⊕ +
+            </div><button data-setoran-open class="rounded-lg bg-[#92591f] px-6 py-3 text-sm font-bold text-white"> +
                 Tambah Setoran Baru</button>
         </div>
     </section>
